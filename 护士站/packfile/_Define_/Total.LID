@@ -1,0 +1,176 @@
+<LanguageDef>
+<Language>
+	<Value>0</Value>
+	<Name>中文</Name>
+	<EnglishName>Mandarin</EnglishName>
+	<XMLLang>zh;zho;chi;zh-CN;zho-CN;chi-CN</XMLLang>
+</Language>
+<Language>
+	<Value>1</Value>
+	<Name>广东话</Name>
+	<EnglishName>Cantonese</EnglishName>
+	<XMLLang>zh-yue;i-yue;zh-HK</XMLLang>
+</Language>
+<Language>
+	<Value>10</Value>
+	<Name>美国英语</Name>
+	<EnglishName>US_English</EnglishName>
+	<XMLLang>en;eng;en-US;eng-US</XMLLang>
+</Language>
+<Language>
+	<Value>11</Value>
+	<Name>英国英语</Name>
+	<EnglishName>British_English</EnglishName>
+	<XMLLang>eng-GB;en-GB</XMLLang>
+</Language>
+<Language>
+	<Value>20</Value>
+	<Name>法语</Name>
+	<EnglishName>French</EnglishName>
+	<XMLLang>fr;fre;fra</XMLLang>
+</Language>
+<Language>
+	<Value>21</Value>
+	<Name>加拿大法语</Name>
+	<EnglishName>Canadian_French</EnglishName>
+	<XMLLang>fr-CA;fre-CA;fra-CA</XMLLang>
+</Language>
+<Language>
+	<Value>30</Value>
+	<Name>西班牙语</Name>
+	<EnglishName>Spanish</EnglishName>
+	<XMLLang>es;spa</XMLLang>
+</Language>
+<Language>
+	<Value>31</Value>
+	<Name>拉美西班牙语</Name>
+	<EnglishName>LatinAmerian_Spanish</EnglishName>
+	<XMLLang>es-MX;spa-MX</XMLLang>
+</Language>
+<Language>
+	<Value>40</Value>
+	<Name>葡萄牙语</Name>
+	<EnglishName>Portuguese</EnglishName>
+	<XMLLang>pt;por</XMLLang>
+</Language>
+<Language>
+	<Value>41</Value>
+	<Name>巴西葡萄牙语</Name>
+	<EnglishName>Brazilian_Portuguese</EnglishName>
+	<XMLLang>pt-BR;por-BR</XMLLang>
+</Language>
+<Language>
+	<Value>50</Value>
+	<Name>荷兰语</Name>
+	<EnglishName>Dutch</EnglishName>
+	<XMLLang>nl;dut;nld</XMLLang>
+</Language>
+<Language>
+	<Value>51</Value>
+	<Name>比利时荷兰语</Name>
+	<EnglishName>Belgian_Dutch</EnglishName>
+	<XMLLang>nl-BE;dut-BE;nld-BE</XMLLang>
+</Language>
+<Language>
+	<Value>60</Value>
+	<Name>德语</Name>
+	<EnglishName>German</EnglishName>
+	<XMLLang>de;ger;deu</XMLLang>
+</Language>
+<Language>
+	<Value>70</Value>
+	<Name>意大利语</Name>
+	<EnglishName>Italian</EnglishName>
+	<XMLLang>it;ita</XMLLang>
+</Language>
+<Language>
+	<Value>80</Value>
+	<Name>瑞士语</Name>
+	<EnglishName>Swidish</EnglishName>
+	<XMLLang>sv;swe</XMLLang>
+</Language>
+<Language>
+	<Value>90</Value>
+	<Name>挪威语</Name>
+	<EnglishName>NORWEGIAN</EnglishName>
+	<XMLLang>no;nor</XMLLang>
+</Language>
+<Language>
+	<Value>100</Value>
+	<Name>丹麦语</Name>
+	<EnglishName>DANISH</EnglishName>
+	<XMLLang>da;dan</XMLLang>
+</Language>
+<Language>
+	<Value>110</Value>
+	<Name>波兰语</Name>
+	<EnglishName>Polish</EnglishName>
+	<XMLLang>pl;pol</XMLLang>
+</Language>
+<Language>
+	<Value>120</Value>
+	<Name>希腊语</Name>
+	<EnglishName>GREEK</EnglishName>
+	<XMLLang>el;gre;ell</XMLLang>
+</Language>
+<Language>
+	<Value>130</Value>
+	<Name>匈牙利语</Name>
+	<EnglishName>HUNGARIAN</EnglishName>
+	<XMLLang>hu;hun</XMLLang>
+</Language>
+<Language>
+	<Value>140</Value>
+	<Name>捷克语</Name>
+	<EnglishName>CZECH</EnglishName>
+	<XMLLang>cs;cze;ces</XMLLang>
+</Language>
+<Language>
+	<Value>150</Value>
+	<Name>土耳其语</Name>
+	<EnglishName>TURKISH</EnglishName>
+	<XMLLang>tr;tur</XMLLang>
+</Language>
+<Language>
+	<Value>500</Value>
+	<Name>俄语</Name>
+	<EnglishName>RUSSIAN</EnglishName>
+	<XMLLang>ru;rus</XMLLang>
+</Language>
+<Language>
+	<Value>600</Value>
+	<Name>阿拉伯语</Name>
+	<EnglishName>ARABIC</EnglishName>
+	<XMLLang>ar;ara</XMLLang>
+</Language>
+<Language>
+	<Value>700</Value>
+	<Name>日语</Name>
+	<EnglishName>Japanese</EnglishName>
+	<XMLLang>ja</XMLLang>
+</Language>
+<Language>
+	<Value>710</Value>
+	<Name>韩语</Name>
+	<EnglishName>KOREAN</EnglishName>
+	<XMLLang>ko;kor</XMLLang>
+</Language>
+<Language>
+	<Value>720</Value>
+	<Name>越南语</Name>
+	<EnglishName>VIETNAMESE</EnglishName>
+	<XMLLang>vi;vie</XMLLang>
+</Language>
+<Language>
+	<Value>730</Value>
+	<Name>马来语</Name>
+	<EnglishName>MALAY</EnglishName>
+	<XMLLang>ms;may;msa</XMLLang>
+</Language>
+<Language>
+	<Value>740</Value>
+	<Name>泰语</Name>
+	<EnglishName>THAI</EnglishName>
+	<XMLLang>th;tha</XMLLang>
+</Language>
+</LanguageDef>

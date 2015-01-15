@@ -1,0 +1,128 @@
+
+body
+{
+width:100%;
+height:100%;
+}
+#main1
+{
+width:100%;
+height:100%;
+margin:0 auto;
+}
+/* 诊室名称的位置*/
+#top
+{
+position:absolute;
+left:66%;
+top:6%;
+}
+
+/* 医院名称字体位置   */
+#hna
+{
+ padding-left:12px;
+ color:#FFFFFF;
+ font-size:68px;
+ text-align:center;
+ position:absolute;
+ left:90%;
+ top:15%;
+}
+
+#lo
+{
+ position:absolute; 
+ left:3%; 
+ top:3%;
+}
+#logo
+{
+width:100px;
+height:100px;
+}
+
+/* 诊室名称字体的设置 */
+#t1{
+font-size:68px;
+font-family:黑体;
+font-weight:bold;
+color:#003366;
+}
+
+/* 调节医生照片的位置 */
+#pho
+{
+position:absolute;
+left:7%;
+top:25%;
+}
+
+#pho1
+{
+width:280px;
+height:300px;
+}
+/* 医生，科室，职称位置调节 */
+#name
+{
+position:absolute;
+left:14%;
+top:70%;
+}
+/* 医生字体设置 */
+#n1
+{
+font-family:黑体;
+font-size:42px;
+color:#003366;
+font-weight:bold;
+}
+/* 科室字体设置 */
+#n2
+{
+font-family:黑体;
+font-size:42px;
+color:#003366;
+font-weight:bold;
+}
+/* 职称字体设置 */
+#n3
+{
+font-family:黑体;
+font-size:42px;
+color:#003366;
+font-weight:bold;
+}
+
+/* 调节正在就诊位置 */
+#in
+{
+position:absolute;
+left:61%;
+top:32%;
+}
+
+/* 正在就诊字体调节 */
+#t3
+{
+font-family:黑体;
+font-size:90px;
+color:#FF0000;
+font-weight:bold;
+}
+/* 调节准备就诊位置  left要与正在就诊的保持一直 */
+#ed
+{
+position:absolute;
+left:61%;
+top:68%;
+}
+/* 准备就诊字体调节 */
+#t5
+{
+font-family:黑体;
+font-size:90px;
+color:#009933;
+font-weight:bold;
+}

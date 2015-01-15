@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{91F46B99-626B-41DB-9C51-502A84BAEA08}</ProjectGuid>
+    <RootNamespace>NurseStation</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Account.cpp" />
+    <ClCompile Include="AddCommentDlg.cpp" />
+    <ClCompile Include="ado2.cpp" />
+    <ClCompile Include="BaseConfig.cpp" />
+    <ClCompile Include="CallerInterface.cpp" />
+    <ClCompile Include="ChangeQueDialog.cpp" />
+    <ClCompile Include="ChatDlg.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="ColorStatic.cpp" />
+    <ClCompile Include="com\ComInit.cpp" />
+    <ClCompile Include="CommonConvert.cpp" />
+    <ClCompile Include="com\ComplSocketClient.cpp" />
+    <ClCompile Include="ComputeFuncationTime.cpp" />
+    <ClCompile Include="ConfDisplayDlg.cpp" />
+    <ClCompile Include="ConfSoundDlg.cpp" />
+    <ClCompile Include="ConnectToBase.cpp" />
+    <ClCompile Include="ConnectToHis.cpp" />
+    <ClCompile Include="ConnectToMyDataBase.cpp" />
+    <ClCompile Include="Consult.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="ControlRect.cpp" />
+    <ClCompile Include="Doc_NurseDlg.cpp" />
+    <ClCompile Include="DocInfoView.cpp" />
+    <ClCompile Include="com\DoComInOut.cpp" />
+    <ClCompile Include="DoctorCallConfDlg.cpp" />
+    <ClCompile Include="DoctorManageDlg.cpp" />
+    <ClCompile Include="DoFile.cpp" />
+    <ClCompile Include="DrawStars.cpp" />
+    <ClCompile Include="EditPatNameDlg.cpp" />
+    <ClCompile Include="HeaderCtrlCl.cpp" />
+    <ClCompile Include="IniFile.cpp" />
+    <ClCompile Include="JttsAPI.cpp" />
+    <ClCompile Include="LCDShow.cpp" />
+    <ClCompile Include="ListCtrlCl.cpp" />
+    <ClCompile Include="LoginController.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MyAsyncSocket.cpp" />
+    <ClCompile Include="MyCommon.cpp" />
+    <ClCompile Include="MyFile.cpp" />
+    <ClCompile Include="MyGetFile.cpp" />
+    <ClCompile Include="MyListBox.cpp" />
+    <ClCompile Include="MyPort.cpp" />
+    <ClCompile Include="MySocketUDP.cpp" />
+    <ClCompile Include="MyString.cpp" />
+    <ClCompile Include="NurseController.cpp" />
+    <ClCompile Include="NurseOfficeQueue.cpp" />
+    <ClCompile Include="NurseStation.cpp" />
+    <ClCompile Include="NurseStationDoc.cpp" />
+    <ClCompile Include="NurseStationView.cpp" />
+    <ClCompile Include="NurseView.cpp" />
+    <ClCompile Include="OfficeQueView.cpp" />
+    <ClCompile Include="OpenDatabase.cpp" />
+    <ClCompile Include="PaientView.cpp" />
+    <ClCompile Include="Parameter.cpp" />
+    <ClCompile Include="PoolManage.cpp" />
+    <ClCompile Include="PropConnectToHisSet.cpp" />
+    <ClCompile Include="PropDlgThroughLED.cpp" />
+    <ClCompile Include="PropPageConfigCom.cpp" />
+    <ClCompile Include="PropPageConfigComp.cpp" />
+    <ClCompile Include="PropPageConfigDisplay.cpp" />
+    <ClCompile Include="PropPageConfigPrint.cpp" />
+    <ClCompile Include="PropPageConfigSound.cpp" />
+    <ClCompile Include="PropPrintPic.cpp" />
+    <ClCompile Include="PropPrintSet.cpp" />
+    <ClCompile Include="PropPrintShowTime.cpp" />
+    <ClCompile Include="PropPrintText.cpp" />
+    <ClCompile Include="PropQueSettting.cpp" />
+    <ClCompile Include="PropSetting.cpp" />
+    <ClCompile Include="PropSheet.cpp" />
+    <ClCompile Include="PropSheetConfig.cpp" />
+    <ClCompile Include="QueueController.cpp" />
+    <ClCompile Include="ReadCardDlg.cpp" />
+    <ClCompile Include="ReadHisData.cpp" />
+    <ClCompile Include="ReadHisDoctor.cpp" />
+    <ClCompile Include="ReadHisOffice.cpp" />
+    <ClCompile Include="ReCallSetDlg.cpp" />
+    <ClCompile Include="SearchDataDlg.cpp" />
+    <ClCompile Include="SendToHardWare.cpp" />
+    <ClCompile Include="ServiceController.cpp" />
+    <ClCompile Include="SetDataBaseDlg.cpp" />
+    <ClCompile Include="SetDoctorDialog.cpp" />
+    <ClCompile Include="com\SLZCCaller.cpp" />
+    <ClCompile Include="com\SLZCWndScreen.cpp" />
+    <ClCompile Include="SLZData.cpp" />
+    <ClCompile Include="SLZPrinter.cpp" />
+    <ClCompile Include="StbPropDlg.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SuspendPatDlg.cpp" />
+    <ClCompile Include="TextModifyDlg.cpp" />
+    <ClCompile Include="TrackContrl.cpp" />
+    <ClCompile Include="TransButton.cpp" />
+    <ClCompile Include="TransStatic.cpp" />
+    <ClCompile Include="UserSetting.cpp" />
+    <ClCompile Include="VisonShowLED.cpp" />
+    <ClCompile Include="WaitingRoomConfPropDlg.cpp" />
+    <ClCompile Include="WriteLog.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="jTTS_ML.lib" />
+    <Library Include="QueSystemLicense.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ACCallback.h" />
+    <ClInclude Include="Account.h" />
+    <ClInclude Include="AddCommentDlg.h" />
+    <ClInclude Include="ado2.h" />
+    <ClInclude Include="BaseConfig.h" />
+    <ClInclude Include="CallerInterface.h" />
+    <ClInclude Include="ChangeQueDialog.h" />
+    <ClInclude Include="ChatDlg.h" />
+    <ClInclude Include="ColorStatic.h" />
+    <ClInclude Include="com\ComInit.h" />
+    <ClInclude Include="CommonConvert.h" />
+    <ClInclude Include="com\ComplSocketClient.h" />
+    <ClInclude Include="ComputeFuncationTime.h" />
+    <ClInclude Include="ConfDisplayDlg.h" />
+    <ClInclude Include="ConfSoundDlg.h" />
+    <ClInclude Include="ConnectToBase.h" />
+    <ClInclude Include="ConnectToHis.h" />
+    <ClInclude Include="ConnectToMyDataBase.h" />
+    <ClInclude Include="Consult.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="ControlRect.h" />
+    <ClInclude Include="com\DataDef.h" />
+    <ClInclude Include="Doc_NurseDlg.h" />
+    <ClInclude Include="DocInfoView.h" />
+    <ClInclude Include="com\DoComInOut.h" />
+    <ClInclude Include="DoctorCallConfDlg.h" />
+    <ClInclude Include="DoctorManageDlg.h" />
+    <ClInclude Include="DoFile.h" />
+    <ClInclude Include="DrawStars.h" />
+    <ClInclude Include="EditPatNameDlg.h" />
+    <ClInclude Include="com\HardWareDef.h" />
+    <ClInclude Include="HeaderCtrlCl.h" />
+    <ClInclude Include="IniFile.h" />
+    <ClInclude Include="jTTS_ML.h" />
+    <ClInclude Include="JttsAPI.h" />
+    <ClInclude Include="LCDShow.h" />
+    <ClInclude Include="LEDApi.h" />
+    <ClInclude Include="LicenseMaker.h" />
+    <ClInclude Include="ListCtrlCl.h" />
+    <ClInclude Include="LoginController.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MyAsyncSocket.h" />
+    <ClInclude Include="MyCommon.h" />
+    <ClInclude Include="MyFile.h" />
+    <ClInclude Include="MyGetFile.h" />
+    <ClInclude Include="MyListBox.h" />
+    <ClInclude Include="MyPort.h" />
+    <ClInclude Include="MySocketUDP.h" />
+    <ClInclude Include="MyString.h" />
+    <ClInclude Include="MyTimer.h" />
+    <ClInclude Include="MyWriteConsole.h" />
+    <ClInclude Include="NurseController.h" />
+    <ClInclude Include="NurseDef.h" />
+    <ClInclude Include="NurseOfficeQueue.h" />
+    <ClInclude Include="NurseStation.h" />
+    <ClInclude Include="NurseStationDoc.h" />
+    <ClInclude Include="NurseStationView.h" />
+    <ClInclude Include="NurseView.h" />
+    <ClInclude Include="OfficeQueView.h" />
+    <ClInclude Include="OpenDatabase.h" />
+    <ClInclude Include="PaientView.h" />
+    <ClInclude Include="Parameter.h" />
+    <ClInclude Include="PoolManage.h" />
+    <ClInclude Include="PrintDef.h" />
+    <ClInclude Include="PropConnectToHisSet.h" />
+    <ClInclude Include="PropDlgThroughLED.h" />
+    <ClInclude Include="PropPageConfigCom.h" />
+    <ClInclude Include="PropPageConfigComp.h" />
+    <ClInclude Include="PropPageConfigDisplay.h" />
+    <ClInclude Include="PropPageConfigPrint.h" />
+    <ClInclude Include="PropPageConfigSound.h" />
+    <ClInclude Include="PropPrintPic.h" />
+    <ClInclude Include="PropPrintSet.h" />
+    <ClInclude Include="PropPrintShowTime.h" />
+    <ClInclude Include="PropPrintText.h" />
+    <ClInclude Include="PropQueSettting.h" />
+    <ClInclude Include="PropSetting.h" />
+    <ClInclude Include="PropSheet.h" />
+    <ClInclude Include="PropSheetConfig.h" />
+    <ClInclude Include="QueueController.h" />
+    <ClInclude Include="QueueServerDef.h" />
+    <ClInclude Include="ReadCardDlg.h" />
+    <ClInclude Include="ReadHisData.h" />
+    <ClInclude Include="ReadHisDoctor.h" />
+    <ClInclude Include="ReadHisOffice.h" />
+    <ClInclude Include="ReCallSetDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SearchDataDlg.h" />
+    <ClInclude Include="SendToHardWare.h" />
+    <ClInclude Include="ServiceController.h" />
+    <ClInclude Include="SetDataBaseDlg.h" />
+    <ClInclude Include="SetDoctorDialog.h" />
+    <ClInclude Include="com\SLZCallerData.h" />
+    <ClInclude Include="com\SLZCCaller.h" />
+    <ClInclude Include="com\SLZCWndScreen.h" />
+    <ClInclude Include="SLZData.h" />
+    <ClInclude Include="SLZPrinter.h" />
+    <ClInclude Include="com\SocketBufDef.h" />
+    <ClInclude Include="StbPropDlg.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SuspendPatDlg.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TextModifyDlg.h" />
+    <ClInclude Include="TrackContrl.h" />
+    <ClInclude Include="TrackDef.h" />
+    <ClInclude Include="TransButton.h" />
+    <ClInclude Include="TransStatic.h" />
+    <ClInclude Include="UserSetting.h" />
+    <ClInclude Include="VisonShowLED.h" />
+    <ClInclude Include="WaitingRoomConfPropDlg.h" />
+    <ClInclude Include="WriteLog.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\active.ico" />
+    <None Include="res\admini.ico" />
+    <None Include="res\back.ico" />
+    <None Include="res\backmap.bmp" />
+    <None Include="res\bigadmin.ico" />
+    <None Include="res\bigback.ico" />
+    <None Include="res\biguser.ico" />
+    <None Include="res\bitmap2.bmp" />
+    <None Include="res\Doc_Nurse.ico" />
+    <None Include="res\doctor.ico" />
+    <None Include="res\exchange.ico" />
+    <None Include="res\hos-s.bmp" />
+    <None Include="res\hospital.bmp" />
+    <None Include="res\insert.ico" />
+    <None Include="res\LOGO.bmp" />
+    <None Include="res\mainfram.bmp" />
+    <None Include="res\Message.ico" />
+    <None Include="res\myeasy.ico" />
+    <None Include="res\MyUser.ico" />
+    <None Include="res\nurse.ico" />
+    <None Include="res\NurseStation.ico" />
+    <None Include="res\NurseStation.rc2" />
+    <None Include="res\NurseStationDoc.ico" />
+    <None Include="res\outport.ico" />
+    <None Include="res\queue.ico" />
+    <None Include="res\quit.ico" />
+    <None Include="res\recall.ico" />
+    <None Include="res\refresh.ico" />
+    <None Include="res\repeat.ico" />
+    <None Include="res\screen_64.bmp" />
+    <None Include="res\seerch.ico" />
+    <None Include="res\setdoc.ico" />
+    <None Include="res\show.ico" />
+    <None Include="res\sound_64.bmp" />
+    <None Include="res\suspend.ico" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\user.ico" />
+    <None Include="res\users.ico" />
+    <None Include="res\凌邦LOGO.bmp" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NurseStation.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="NurseStation.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

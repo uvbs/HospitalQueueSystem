@@ -1,0 +1,772 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Account.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AddCommentDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ado2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CallerInterface.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeQueDialog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorStatic.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="com\ComInit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonConvert.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="com\ComplSocketClient.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputeFuncationTime.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfDisplayDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfSoundDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectToBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectToHis.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectToMyDataBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Consult.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlRect.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Doc_NurseDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DocInfoView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="com\DoComInOut.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DoctorCallConfDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DoctorManageDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DoFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawStars.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EditPatNameDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HeaderCtrlCl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IniFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="JttsAPI.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LCDShow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ListCtrlCl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyAsyncSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCommon.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyGetFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyListBox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyPort.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MySocketUDP.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyString.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NurseController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NurseOfficeQueue.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NurseStation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NurseStationDoc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NurseStationView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NurseView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="OfficeQueView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenDatabase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PaientView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Parameter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolManage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropConnectToHisSet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropDlgThroughLED.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPageConfigCom.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPageConfigComp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPageConfigDisplay.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPageConfigPrint.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPageConfigSound.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPrintPic.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPrintSet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPrintShowTime.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPrintText.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropQueSettting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropSetting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropSheet.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropSheetConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="QueueController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadCardDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadHisData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadHisDoctor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadHisOffice.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ReCallSetDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchDataDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SendToHardWare.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDataBaseDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDoctorDialog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="com\SLZCCaller.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="com\SLZCWndScreen.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SLZData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SLZPrinter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StbPropDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SuspendPatDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TextModifyDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackContrl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TransButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TransStatic.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserSetting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="VisonShowLED.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WaitingRoomConfPropDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="jTTS_ML.lib">
+      <Filter>源文件</Filter>
+    </Library>
+    <Library Include="QueSystemLicense.lib">
+      <Filter>头文件</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ACCallback.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Account.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AddCommentDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ado2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CallerInterface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeQueDialog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorStatic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="com\ComInit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonConvert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="com\ComplSocketClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeFuncationTime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfDisplayDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfSoundDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectToBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectToHis.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectToMyDataBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Consult.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlRect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="com\DataDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Doc_NurseDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DocInfoView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="com\DoComInOut.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DoctorCallConfDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DoctorManageDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DoFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawStars.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EditPatNameDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="com\HardWareDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HeaderCtrlCl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IniFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="jTTS_ML.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="JttsAPI.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LCDShow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LEDApi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LicenseMaker.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ListCtrlCl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyAsyncSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyCommon.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyGetFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyListBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyPort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MySocketUDP.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyString.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTimer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyWriteConsole.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NurseController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NurseDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NurseOfficeQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NurseStation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NurseStationDoc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NurseStationView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NurseView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="OfficeQueView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenDatabase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PaientView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Parameter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolManage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropConnectToHisSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropDlgThroughLED.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPageConfigCom.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPageConfigComp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPageConfigDisplay.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPageConfigPrint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPageConfigSound.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPrintPic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPrintSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPrintShowTime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPrintText.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropQueSettting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropSetting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropSheet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropSheetConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="QueueController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="QueueServerDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadCardDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadHisData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadHisDoctor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadHisOffice.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ReCallSetDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchDataDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SendToHardWare.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDataBaseDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDoctorDialog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="com\SLZCallerData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="com\SLZCCaller.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="com\SLZCWndScreen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SLZData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SLZPrinter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="com\SocketBufDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StbPropDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SuspendPatDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TextModifyDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackContrl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TransButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TransStatic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserSetting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VisonShowLED.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitingRoomConfPropDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\active.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\admini.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\back.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\backmap.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\bigadmin.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\bigback.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\biguser.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\bitmap2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Doc_Nurse.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\doctor.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\exchange.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\hos-s.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\hospital.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\insert.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\LOGO.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\mainfram.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Message.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\myeasy.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\MyUser.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\nurse.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\NurseStation.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\NurseStation.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\NurseStationDoc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\outport.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\queue.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\quit.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\recall.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\refresh.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\repeat.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\screen_64.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\seerch.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\setdoc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\show.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\sound_64.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\suspend.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\user.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\users.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\凌邦LOGO.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NurseStation.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

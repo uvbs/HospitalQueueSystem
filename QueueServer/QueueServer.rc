@@ -1,0 +1,331 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\QueueServer.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""l.CHS\\afxres.rc""      // 标准组件\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\QueueServer.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 233, 92
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 排队叫号系统服务器主程序"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
+    DEFPUSHBUTTON   "确定",IDOK,176,71,50,14,WS_GROUP
+    LTEXT           "排队叫号系统服务器主程序",IDC_STATIC,40,13,114,8,SS_NOPREFIX
+    LTEXT           "(C) 2014 北京凌邦合创电子科技有限公司\n保留所有权利",IDC_STATIC,40,37,192,19
+    LTEXT           "v5.5.0 版本",IDC_STATIC,40,25,114,7,SS_NOPREFIX
+END
+
+IDD_QUEUESERVER_DIALOG DIALOGEX 0, 0, 150, 81
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "排队叫号系统服务器主程序"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "隐藏",IDC_BUTTON_HIDE,13,16,61,26
+    PUSHBUTTON      "配置",IDC_BUTTON_CONF,75,16,61,26
+    PUSHBUTTON      "退出",IDC_BUTTON_QUIT,75,44,61,26
+    PUSHBUTTON      "重启",IDC_BUTTON_RESTART,13,44,61,26
+END
+
+IDD_PROP_LOCAL_DB DIALOGEX 0, 0, 234, 156
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "排队系统数据"
+FONT 10, "宋体", 400, 0, 0x86
+BEGIN
+    GROUPBOX        "排队系统 SQL Server 数据库设置",IDC_STATIC,11,9,211,112
+    RTEXT           "用户名",IDC_STATIC,37,61,36,12
+    RTEXT           "密码",IDC_STATIC,37,92,36,12
+    RTEXT           "主机IP\\实例名",IDC_STATIC,14,31,59,12
+    EDITTEXT        IDC_EDIT_UID,84,58,122,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PWD,84,88,122,16,ES_PASSWORD | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_HOST,84,28,122,16,ES_AUTOHSCROLL
+    PUSHBUTTON      "初始化排队系统数据库",IDC_BUTTON_INIT_DB,10,136,91,14
+END
+
+IDD_PROPPAGE_SOCKET DIALOGEX 0, 0, 232, 146
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "通讯接口"
+FONT 10, "宋体", 400, 0, 0x86
+BEGIN
+    GROUPBOX        "Socket套接字配置",IDC_STATIC,12,8,201,98
+    RTEXT           "开放端口",IDC_STATIC,25,67,45,13
+    RTEXT           "本机IP地址",IDC_STATIC,25,33,45,9
+    EDITTEXT        IDC_EDIT_LOCAL_IP,80,31,119,17,ES_AUTOHSCROLL | ES_READONLY | WS_DISABLED
+    EDITTEXT        IDC_EDIT_LISTEN_PORT,80,64,119,17,ES_AUTOHSCROLL
+END
+
+IDD_PROP_HIS_DB DIALOGEX 0, 0, 235, 188
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "HIS数据"
+FONT 10, "宋体", 400, 0, 0x86
+BEGIN
+    GROUPBOX        "HIS数据库设置",IDC_STATIC,11,6,202,136
+    RTEXT           "用户名",IDC_STATIC,21,24,36,12
+    RTEXT           "密码",IDC_STATIC,21,49,36,12
+    RTEXT           "主机IP",IDC_STATIC,21,72,36,12
+    EDITTEXT        IDC_EDIT_UID,65,20,122,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PWD,65,45,122,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_HOST,65,69,122,16,ES_AUTOHSCROLL
+    RTEXT           "端口号",IDC_STATIC,21,96,36,12
+    EDITTEXT        IDC_EDIT_PORT,65,93,122,16,ES_AUTOHSCROLL
+    RTEXT           "服务名",IDC_STATIC,21,120,36,12
+    EDITTEXT        IDC_EDIT_SERVICE_NAME,65,117,122,16,ES_AUTOHSCROLL
+    GROUPBOX        "HIS数据选项",IDC_STATIC,11,146,202,33,NOT WS_VISIBLE
+    RTEXT           "读取前",IDC_STATIC,21,159,36,12,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT_DATA_DAYS,65,156,56,16,ES_RIGHT | ES_AUTOHSCROLL | NOT WS_VISIBLE
+    RTEXT           "天内的数据",IDC_STATIC,137,160,50,12,NOT WS_VISIBLE
+END
+
+IDD_DIALOG_INIT_LOCAL_DB DIALOGEX 0, 0, 258, 134
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "初始化排队系统数据库"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,144,113,50,14
+    PUSHBUTTON      "取消",IDCANCEL,198,113,50,14
+    RTEXT           "用户名",IDC_STATIC,33,51,42,12
+    RTEXT           "密码",IDC_STATIC,33,82,42,12
+    RTEXT           "主机IP\\实例名",IDC_STATIC,15,21,60,12
+    EDITTEXT        IDC_EDIT_UID,84,48,143,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PWD,84,78,143,16,ES_PASSWORD | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_HOST,84,18,143,16,ES_AUTOHSCROLL
+END
+
+IDD_PROP_HIS_DSN DIALOGEX 0, 0, 234, 156
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "HIS系统数据"
+FONT 10, "宋体", 400, 0, 0x86
+BEGIN
+    RTEXT           "ODBC数据源名称：",-1,4,31,73,12
+    EDITTEXT        IDC_EDIT_DSN,80,28,107,16,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 5,5,0,0
+ PRODUCTVERSION 5,5,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080403a8"
+        BEGIN
+            VALUE "CompanyName", "北京凌邦合创电子科技有限公司"
+            VALUE "FileDescription", "排队叫号系统服务端"
+            VALUE "FileVersion", "5.5.0.0"
+            VALUE "InternalName", "QueueServer.exe"
+            VALUE "LegalCopyright", "(C) 2014 北京凌邦合创电子科技有限公司 保留所有权利"
+            VALUE "OriginalFilename", "QueueServer.exe"
+            VALUE "ProductName", "排队叫号系统服务端"
+            VALUE "ProductVersion", "5.5.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 936
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 226
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 85
+    END
+
+    IDD_QUEUESERVER_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 143
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 74
+    END
+
+    IDD_PROP_LOCAL_DB, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 154
+    END
+
+    IDD_PROP_HIS_DB, DIALOG
+    BEGIN
+        RIGHTMARGIN, 234
+    END
+
+    IDD_DIALOG_INIT_LOCAL_DB, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 251
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 127
+    END
+
+    IDD_PROP_HIS_DSN, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 154
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_ICON MENU 
+BEGIN
+    POPUP "图标菜单"
+    BEGIN
+        MENUITEM "显示",                          ID_MENUITEM_SHOW
+        MENUITEM "设置",                          ID_MENUITEM_CONF
+        MENUITEM SEPARATOR
+        MENUITEM "重启",                          ID_MENUITEM_RESTART
+        MENUITEM "退出",                          ID_MENUITEM_QUIT
+    END
+END
+
+IDR_MENU_ICON1 MENU 
+BEGIN
+    POPUP "图标菜单"
+    BEGIN
+        MENUITEM "显示",                          ID_MENUITEM_SHOW
+        MENUITEM "设置",                          ID_MENUITEM_CONF
+        MENUITEM SEPARATOR
+        MENUITEM "重启",                          ID_MENUITEM_RESTART
+        MENUITEM "退出",                          ID_MENUITEM_QUIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 QueueServer(&A)..."
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\QueueServer.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "l.CHS\afxres.rc"      // 标准组件
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

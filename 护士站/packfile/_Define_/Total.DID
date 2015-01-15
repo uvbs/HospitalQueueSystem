@@ -1,0 +1,72 @@
+<DomainDef>
+<Domain>
+	<Value>0</Value>
+	<Name>通用领域</Name>
+	<EnglishName>Common</EnglishName>
+</Domain>
+<Domain>
+	<Value>1</Value>
+	<Name>金融证券</Name>
+	<EnglishName>Finance</EnglishName>
+</Domain>
+<Domain>
+	<Value>2</Value>
+	<Name>天气预报</Name>
+	<EnglishName>Weather</EnglishName>
+</Domain>
+<Domain>
+	<Value>3</Value>
+	<Name>体育赛事</Name>
+	<EnglishName>Sports</EnglishName>
+</Domain>
+<Domain>
+	<Value>4</Value>
+	<Name>公交信息</Name>
+	<EnglishName>Traffic</EnglishName>
+</Domain>
+<Domain>
+	<Value>5</Value>
+	<Name>旅游餐饮</Name>
+	<EnglishName>Travel</EnglishName>
+</Domain>
+<Domain>
+	<Value>6</Value>
+	<Name>汽运</Name>
+	<EnglishName>Carborne</EnglishName>
+</Domain>
+<Domain>
+	<Value>7</Value>
+	<Name>排队叫号</Name>
+	<EnglishName>Queue</EnglishName>	
+</Domain>
+<Domain>
+	<Value>8</Value>
+	<Name>名家金曲</Name>
+	<EnglishName>Song</EnglishName>	
+</Domain>
+<Domain>
+	<Value>9</Value>
+	<Name>保险</Name>
+	<EnglishName>Insurance</EnglishName>	
+</Domain>
+<Domain>
+	<Value>10</Value>
+	<Name>航空</Name>
+	<EnglishName>Voyage</EnglishName>	
+</Domain>
+<Domain>
+	<Value>11</Value>
+	<Name>税务</Name>
+	<EnglishName>Revenue</EnglishName>	
+</Domain>
+<Domain>
+	<Value>12</Value>
+	<Name>电力</Name>
+	<EnglishName>Elecpower</EnglishName>	
+</Domain>
+<Domain>
+	<Value>13</Value>
+	<Name>短信</Name>
+	<EnglishName>Message</EnglishName>	
+</Domain>
+</DomainDef>
