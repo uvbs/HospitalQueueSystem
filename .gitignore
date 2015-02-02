@@ -2,7 +2,6 @@ Thumbs.db
 *.obj
 *.exe
 *.pdb
-*.user
 *.aps
 *.pch
 *.vspscc
@@ -28,6 +27,7 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 *.scc
+*.user
 *.sdf
 *.opensdf
 $tf*/

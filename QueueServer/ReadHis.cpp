@@ -32,10 +32,14 @@ CReadHis::~CReadHis()
 
 BOOL CReadHis::Start()
 {
+	//ReadDepart();
+	//ReadClinic();
+	//ReadDoctor();
+
+	//m_nHisDays = GetHisDays(5);
 	LoadConf();
 
 	LoadMap();
-
 
 	BOOL bThread = StartPatientThread();
 
@@ -221,11 +225,15 @@ BOOL CReadHis::ReadPatient()
 		return FALSE;
 	}
 
+	//CString strQuery(_T("SELECT * FROM (SELECT serial_id,reg_id,id_card,queue_num,patient_name,patient_gender,patient_birth,id_depart,time,id_doctor,id_item,in_flag FROM HisForBjlb_Patient WHERE time>to_date(to_char(sysdate,'yyyymmdd'),'yyyymmdd') ORDER BY time DESC) WHERE rownum<500"));
+	CString strQuery(_T("SELECT * FROM (SELECT serial_id,reg_id,id_card,queue_num,patient_name,patient_gender,patient_birth,id_depart,time,id_doctor,id_item,in_flag,patient_id,em_flag FROM HisForBjlb_Patient P WHERE time>to_date(to_char(sysdate,'yyyymmdd'),'yyyymmdd') ORDER BY time DESC) WHERE rownum<500"));
+	//CString strQuery(_T("SELECT * FROM (SELECT serial_id,reg_id,id_card,queue_num,patient_name,patient_gender,patient_birth,id_depart,time,id_doctor,id_item,item_desc,in_flag FROM HisForBjlb_Patient WHERE time>to_date(to_char(sysdate,'yyyymmdd'),'yyyymmdd') ORDER BY time DESC) P where rownum<200"));
+
 	//获取HIS数据
 	CADORecordset hisRset(&hisDb);
 	try
 	{
-		if(!hisRset.Open(m_strQueryPatient))
+		if(!hisRset.Open(strQuery))
 		{
 			return FALSE;
 		}
@@ -257,44 +265,19 @@ BOOL CReadHis::ReadPatient()
 		{
 			CString strSerialId;
 
-			hisRset.GetFieldValue(_T("serial_id"), strSerialId);
-/*
-			CString strQuery;
-			strQuery.Format(_T("SELECT serial_id FROM HisForBjlb_Patient WHERE serial_id='%s'"),
-				strSerialId);
-			try
-			{
-				myRset.Open(strQuery);
-				if(!myRset.IsBOF())
-				{
-					myRset.Close();
-					continue;
-				}
-				myRset.Close();
-			}
-			catch (_com_error& e)
-			{
-				if(!m_bMyDbErr)
-				{
-					m_bMyDbErr = TRUE;
-					CString strErr;
-					strErr.Format(_T("ReadPatient:读取病人表[HisForBjlb_Patient].[serial_id]时出错: %s"), e.ErrorMessage());
-					WriteLog::WriteTimeErrLog(strErr);
-				}
-				myRset.Close();
-				continue;
-			}
-*/
 			CString strRegId,strIdCard,strQueueNum,strPatientName,strPatientGender,strPatientBirth,
-				strIdDepart,strTime,strIdDoctor,strIdItem,strItemDesc,strInFlag;
+				strIdDepart,strTime,strIdDoctor,strIdItem,strItemDesc,strInFlag,strPatientId,strEmFlag;
 
+			hisRset.GetFieldValue(_T("serial_id"), strSerialId);
 			hisRset.GetFieldValue(_T("reg_id"), strRegId);
 			if(strRegId.IsEmpty())
 			{
 				strRegId = strSerialId;
 			}
+			//strRegId.Remove('.');
 			hisRset.GetFieldValue(_T("id_card"), strIdCard);
 			hisRset.GetFieldValue(_T("queue_num"), strQueueNum);
+			hisRset.GetFieldValue(_T("patient_id"), strPatientId);
 			hisRset.GetFieldValue(_T("patient_name"), strPatientName);
 			//WriteLog::Write(strPatientName + _T("|"));
 			//strPatientName.Trim();
@@ -324,10 +307,30 @@ BOOL CReadHis::ReadPatient()
 				strIdDoctor = _T("'") + strIdDoctor + _T("'");
 			}
 
-			hisRset.GetFieldValue(_T("id_item"), strIdItem);
-			if(!strIdItem.IsEmpty())
+			//hisRset.GetFieldValue(_T("id_item"), strIdItem);
+			//if(!strIdItem.IsEmpty())
+			//{
+			//	strIdDepart = m_mapItemDepart[strIdItem];
+			//}
+			if(hisRset.IsFieldNull(_T("id_item")))
 			{
-				strIdDepart = m_mapItemDepart[strIdItem];
+				strIdItem = _T("null");
+			}
+			else
+			{
+				hisRset.GetFieldValue(_T("id_item"), strIdItem);
+				if(!strIdItem.IsEmpty())
+				{
+					if(!m_mapItemDepart[strIdItem].IsEmpty())
+					{
+						strIdDepart = m_mapItemDepart[strIdItem];
+					}
+					strIdItem = _T("'") + strIdItem + _T("'");
+				}
+				else
+				{
+					strIdItem = _T("null");
+				}
 			}
 			//hisRset.GetFieldValue(_T("item_desc"), strItemDesc);
 			hisRset.GetFieldValue(_T("in_flag"), strInFlag);
@@ -335,12 +338,23 @@ BOOL CReadHis::ReadPatient()
 			{
 				strInFlag = _T("0");
 			}
+			else if(strInFlag.GetAt(strInFlag.GetLength()-1) == '.')
+			{
+				strInFlag.Delete(strInFlag.GetLength()-1);
+			}
+			hisRset.GetFieldValue(_T("em_flag"), strEmFlag);
+			if(strEmFlag.IsEmpty())
+			{
+				strEmFlag = _T("0");
+			}
+			else if(strEmFlag.GetAt(strEmFlag.GetLength()-1) == '.')
+			{
+				strEmFlag.Delete(strEmFlag.GetLength()-1);
+			}
 
 			CString strQuery;
-			//strQuery.Format(_T("SELECT serial_id FROM HisForBjlb_Patient WHERE serial_id='%s'"),
-			//	strSerialId);
-			strQuery.Format(_T("SELECT serial_id FROM HisForBjlb_Patient WHERE reg_id='%s' AND id_depart='%s' AND time='%s'"),
-				strRegId,strIdDepart,strTime);
+			strQuery.Format(_T("SELECT serial_id FROM HisForBjlb_Patient WHERE patient_id='%s' AND id_depart='%s' AND time='%s'"),
+				strPatientId,strIdDepart,strTime);
 			try
 			{
 				myRset.Open(strQuery);
@@ -364,9 +378,9 @@ BOOL CReadHis::ReadPatient()
 				continue;
 			}
 
-			strInsert.Format(_T("INSERT INTO HisForBjlb_Patient(serial_id,reg_id,id_card,queue_num,patient_name,patient_gender,patient_birth,id_depart,time,id_doctor,id_item,in_flag) VALUES('%s','%s','%s','%s','%s',%s,%s,'%s','%s',%s,'%s',%s);"),
+			strInsert.Format(_T("INSERT INTO HisForBjlb_Patient(serial_id,reg_id,id_card,queue_num,patient_name,patient_gender,patient_birth,id_depart,time,id_doctor,id_item,in_flag,patient_id,em_flag) VALUES('%s','%s','%s','%s','%s',%s,%s,'%s','%s',%s,%s,%s,'%s','%s');"),
 				strSerialId,strRegId,strIdCard,strQueueNum,strPatientName,strPatientGender,strPatientBirth,
-				strIdDepart,strTime,strIdDoctor,strIdItem,strInFlag);
+				strIdDepart,strTime,strIdDoctor,strIdItem,strInFlag,strPatientId,strEmFlag);
 
 			//WriteLog::Write(strInsert);
 
@@ -498,18 +512,30 @@ BOOL CReadHis::ReadDepart()
 
 			if(StringExistInStringArray(strId, strArrId))
 			{
-				strSql.AppendFormat(_T("UPDATE Office SET name='%s',parent_id='%s' WHERE office_id='%s';"),
+				strSql.Format(_T("UPDATE Office SET name='%s',parent_id='%s' WHERE office_id='%s';"),
 					strName, strIdParent, strId);
 			}
 			else
 			{
-				strSql.AppendFormat(_T("INSERT INTO Office(office_id,name,call_name,parent_id,his_flag) VALUES('%s','%s','%s','%s',1);"),
+				strSql.Format(_T("INSERT INTO Office(office_id,name,call_name,parent_id,his_flag) VALUES('%s','%s','%s','%s',1);"),
 					strId,strName,strName,strIdParent);
 			}
-		}
-		//AfxMessageBox(strInsert);
-		//WriteLog::Write(strSql);
 
+			try
+			{
+				myDb.Execute(strSql);
+			}
+			catch (_com_error& e)
+			{
+				if(!m_bMyDbErr)
+				{
+					m_bMyDbErr = TRUE;
+					CString strErr;
+					strErr.Format(_T("ReadDepart:将HIS部门数据写入排队系统数据库时出错: %s"), e.ErrorMessage());
+					WriteLog::WriteTimeErrLog(strErr);
+				}
+			}
+		}
 	}
 	catch (_com_error& e)
 	{
@@ -524,21 +550,6 @@ BOOL CReadHis::ReadDepart()
 	}
 	//m_bHisDbErr = FALSE;
 
-	try
-	{
-		myDb.Execute(strSql);
-	}
-	catch (_com_error& e)
-	{
-		if(!m_bMyDbErr)
-		{
-			m_bMyDbErr = TRUE;
-			CString strErr;
-			strErr.Format(_T("ReadDepart:将HIS部门数据写入排队系统数据库时出错: %s"), e.ErrorMessage());
-			WriteLog::WriteTimeErrLog(strErr);
-		}
-		return FALSE;
-	}
 
 	return TRUE;
 }
@@ -626,18 +637,30 @@ BOOL CReadHis::ReadItem()
 
 			if(StringExistInStringArray(strId, strArrId))
 			{
-				strSql.AppendFormat(_T("UPDATE Item SET name='%s',price='%s' WHERE id='%s';"),
+				strSql.Format(_T("UPDATE Item SET name='%s',price='%s' WHERE id='%s';"),
 					strName, strPrice, strId);
 			}
 			else
 			{
-				strSql.AppendFormat(_T("INSERT INTO Item(id,name,price) VALUES('%s','%s','%s');"),
+				strSql.Format(_T("INSERT INTO Item(id,name,price) VALUES('%s','%s','%s');"),
 					strId,strName,strPrice);
 			}
-		}
-		//AfxMessageBox(strInsert);
-		//WriteLog::Write(strSql);
 
+			try
+			{
+				myDb.Execute(strSql);
+			}
+			catch (_com_error& e)
+			{
+				if(!m_bMyDbErr)
+				{
+					m_bMyDbErr = TRUE;
+					CString strErr;
+					strErr.Format(_T("ReadItem:将HIS检查项目数据写入排队系统数据库时出错: %s"), e.ErrorMessage());
+					WriteLog::WriteTimeErrLog(strErr);
+				}
+			}
+		}
 	}
 	catch (_com_error& e)
 	{
@@ -651,22 +674,6 @@ BOOL CReadHis::ReadItem()
 		return FALSE;
 	}
 	//m_bHisDbErr = FALSE;
-
-	try
-	{
-		myDb.Execute(strSql);
-	}
-	catch (_com_error& e)
-	{
-		if(!m_bMyDbErr)
-		{
-			m_bMyDbErr = TRUE;
-			CString strErr;
-			strErr.Format(_T("ReadItem:将HIS检查项目数据写入排队系统数据库时出错: %s"), e.ErrorMessage());
-			WriteLog::WriteTimeErrLog(strErr);
-		}
-		return FALSE;
-	}
 
 	return TRUE;
 }
@@ -756,17 +763,30 @@ BOOL CReadHis::ReadClinic()
 
 			if(StringExistInStringArray(strId, strArrId))
 			{
-				strSql.AppendFormat(_T("UPDATE Consult SET name='%s',position='%s',office_id='%s' WHERE consult_id='%s';"),
+				strSql.Format(_T("UPDATE Consult SET name='%s',position='%s',office_id='%s' WHERE consult_id='%s';"),
 					strName, strPosition, strIdDepart, strId);
 			}
 			else
 			{
-				strSql.AppendFormat(_T("INSERT INTO Consult(consult_id,name,call_name,position,office_id,his_flag) VALUES('%s','%s','%s','%s','%s',1);"),
+				strSql.Format(_T("INSERT INTO Consult(consult_id,name,call_name,position,office_id,his_flag) VALUES('%s','%s','%s','%s','%s',1);"),
 					strId, strName, strName, strPosition, strIdDepart);
 			}
+
+			try
+			{
+				myDb.Execute(strSql);
+			}
+			catch (_com_error& e)
+			{
+				if(!m_bMyDbErr)
+				{
+					m_bMyDbErr = TRUE;
+					CString strErr;
+					strErr.Format(_T("ReadClinic:将HIS诊室数据写入排队系统数据库时出错: %s"), e.ErrorMessage());
+					WriteLog::WriteTimeErrLog(strErr);
+				}
+			}
 		}
-		//AfxMessageBox(strInsert);
-		//WriteLog::Write(strSql);
 	}
 	catch (_com_error& e)
 	{
@@ -781,23 +801,6 @@ BOOL CReadHis::ReadClinic()
 		return FALSE;
 	}
 	//m_bHisDbErr = FALSE;
-
-	try
-	{
-		myDb.Execute(strSql);
-	}
-	catch (_com_error& e)
-	{
-		if(!m_bMyDbErr)
-		{
-			m_bMyDbErr = TRUE;
-			CString strErr;
-			strErr.Format(_T("ReadClinic:将HIS诊室数据写入排队系统数据库时出错: %s"), e.ErrorMessage());
-			WriteLog::WriteTimeErrLog(strErr);
-		}
-
-		return FALSE;
-	}
 
 	return TRUE;
 }
@@ -825,7 +828,7 @@ BOOL CReadHis::ReadDoctor()
 	CADORecordset hisRset(&hisDb);
 	try
 	{
-		hisRset.Open(_T("SELECT ID,NAME,GENDER,TITLE,EXPERT_FLAG,ID_DEPART,ID_CLINIC FROM HISFORBJLB_DOCTOR"));
+		hisRset.Open(_T("SELECT ID,NAME,GENDER,TITLE,EXPERT_FLAG,ID_DEPART,LOGIN_ID FROM HISFORBJLB_DOCTOR"));
 
 		if(hisRset.IsBOF())
 		{
@@ -886,30 +889,47 @@ BOOL CReadHis::ReadDoctor()
 	{
 		for(; !hisRset.IsEOF(); hisRset.MoveNext())
 		{
-			CString strId,strLoginId,strName,strTitle,strIdClinic, strGender,strExpertFlag, strIdDepart;
+			CString strId,strLoginId,strName,strTitle,strGender,strExpertFlag, strIdDepart;
 
 			hisRset.GetFieldValue(_T("ID"), strId);
 			hisRset.GetFieldValue(_T("NAME"), strName);
-			strLoginId = strName;
 			hisRset.GetFieldValue(_T("GENDER"), strGender);
 			hisRset.GetFieldValue(_T("TITLE"), strTitle);
 			hisRset.GetFieldValue(_T("EXPERT_FLAG"), strExpertFlag);
 			hisRset.GetFieldValue(_T("ID_DEPART"), strIdDepart);
-			hisRset.GetFieldValue(_T("ID_CLINIC"), strIdClinic);
+			hisRset.GetFieldValue(_T("LOGIN_ID"), strLoginId);
+			if(strLoginId.IsEmpty())
+			{
+				strLoginId = strName;
+			}
 
 			if(StringExistInStringArray(strId, strArrId))
 			{
-				strSql.AppendFormat(_T("UPDATE Doctor SET name='%s',gender=%s,title='%s',expert_flag=%s,office_id='%s' WHERE doctor_id='%s';"),
-					strName, strGender, strTitle, strExpertFlag, strIdDepart, strId);
+				strSql.Format(_T("UPDATE Doctor SET name='%s',gender=%s,title='%s' WHERE doctor_id='%s';"),
+					strName, strGender, strTitle, strId);
 			}
 			else
 			{
-				strSql.AppendFormat(_T("INSERT INTO Doctor(doctor_id,login_id,name,gender,title,expert_flag,office_id,consult_id,password,his_flag,sound_call,sound_wait,display_call,display_wait) VALUES('%s','%s','%s',%s,'%s',%s,'%s','%s','123',1,'%s','%s','%s','%s');"),
-					strId, strLoginId, strName, strGender, strTitle, strExpertFlag, strIdDepart, strIdClinic, strCallSound, strWaitSound, strCallDisplay, strWaitDisplay);
+				strSql.Format(_T("INSERT INTO Doctor(doctor_id,login_id,name,gender,title,expert_flag,office_id,password,his_flag,sound_call,sound_wait,display_call,display_wait) VALUES('%s','%s','%s',%s,'%s',%s,'%s','123',1,'%s','%s','%s','%s');"),
+					strId, strLoginId, strName, strGender, strTitle, strExpertFlag, strIdDepart, strCallSound, strWaitSound, strCallDisplay, strWaitDisplay);
+				//WriteLog::Write(strSql);
+			}
+
+			try
+			{
+				myDb.Execute(strSql);
+			}
+			catch (_com_error& e)
+			{
+				if(!m_bMyDbErr)
+				{
+					m_bMyDbErr = TRUE;
+					CString strErr;
+					strErr.Format(_T("ReadDoctor:将HIS医生数据写入排队系统数据库时出错: %s"), e.ErrorMessage());
+					WriteLog::WriteTimeErrLog(strErr);
+				}
 			}
 		}
-		//WriteLog::Write(strSql);
-
 	}
 	catch (_com_error& e)
 	{
@@ -925,22 +945,22 @@ BOOL CReadHis::ReadDoctor()
 	}
 	//m_bHisDbErr = FALSE;
 
-	try
-	{
-		myDb.Execute(strSql);
-	}
-	catch (_com_error& e)
-	{
-		if(!m_bMyDbErr)
-		{
-			m_bMyDbErr = TRUE;
-			CString strErr;
-			strErr.Format(_T("ReadDoctor:将HIS医生数据写入排队系统数据库时出错: %s"), e.ErrorMessage());
-			WriteLog::WriteTimeErrLog(strErr);
-		}
+	//try
+	//{
+	//	myDb.Execute(strSql);
+	//}
+	//catch (_com_error& e)
+	//{
+	//	if(!m_bMyDbErr)
+	//	{
+	//		m_bMyDbErr = TRUE;
+	//		CString strErr;
+	//		strErr.Format(_T("ReadDoctor:将HIS医生数据写入排队系统数据库时出错: %s"), e.ErrorMessage());
+	//		WriteLog::WriteTimeErrLog(strErr);
+	//	}
 
-		return FALSE;
-	}
+	//	return FALSE;
+	//}
 
 	return TRUE;
 }
@@ -997,94 +1017,50 @@ BOOL CReadHis::StringExistInStringArray(CString str, CStringArray& arr)
 
 void CReadHis::LoadConf()
 {
-	//生成本系统数据库连接字符串
 	m_strMyDbConnStr.Format(_T("Driver={%s};Server=%s;Uid=%s;Pwd=%s;Database=Nurse;"),
 		MyCommon::GetProfileString(_T("conn"), _T("DRIVER"), _T("SQL Server"), _T("\\SYS\\mydb.ini")), 
 		MyCommon::GetProfileString(_T("conn"), _T("SERVER"), _T("127.0.0.1"), _T("\\SYS\\mydb.ini")), 
 		MyCommon::GetProfileString(_T("conn"), _T("UID"), _T("sa"), _T("\\SYS\\mydb.ini")), 
 		MyCommon::GetProfileString(_T("conn"), _T("PWD"), _T("123456"), _T("\\SYS\\mydb.ini"))
 		);
+	//Provider=OraOLEDB.Oracle.1
+	//Provider=MSDAORA.1
+	//m_strHisDbConn.Format(_T("Provider=OraOLEDB.Oracle.1;Persist Security Info=False;User ID=%s;Password=%s;hos=%s;port=%s;Data Source=%s;"), 
+	//	MyCommon::GetProfileString(_T("conn"), _T("USER_ID"), _T("hisforbjlb"), _T("\\SYS\\hisdb.ini")), 
+	//	MyCommon::GetProfileString(_T("conn"), _T("PASSWORD"), _T("bjlb2007"), _T("\\SYS\\hisdb.ini")),
+	//	MyCommon::GetProfileString(_T("conn"), _T("HOST"), _T("127.0.0.1"), _T("\\SYS\\hisdb.ini")),
+	//	MyCommon::GetProfileString(_T("conn"), _T("PORT"), _T("1521"), _T("\\SYS\\hisdb.ini")),
+	//	MyCommon::GetProfileString(_T("conn"), _T("SERVICE_NAME"), _T("orcl"), _T("\\SYS\\hisdb.ini"))
+	//	);
 
-	m_nDbType = MyCommon::GetProfileInt(
-		_T("conn"), _T("DB_TYPE"), 0, _T("\\SYS\\hisdb.ini"));
+	//m_strHisDbConn.Format(_T("Provider=OraOLEDB.Oracle.1;Persist Security Info=False;User ID=%s;Password=%s;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=%s)(PORT=%s))(CONNECT_DATA=(SERVER_NAME=%s)));"), 
+	//	MyCommon::GetProfileString(_T("conn"), _T("USER_ID"), _T("hisforbjlb"), _T("\\SYS\\hisdb.ini")), 
+	//	MyCommon::GetProfileString(_T("conn"), _T("PASSWORD"), _T("bjlb2007"), _T("\\SYS\\hisdb.ini")),
+	//	MyCommon::GetProfileString(_T("conn"), _T("HOST"), _T("192.168.100.2"), _T("\\SYS\\hisdb.ini")),
+	//	MyCommon::GetProfileString(_T("conn"), _T("PORT"), _T("1521"), _T("\\SYS\\hisdb.ini")),
+	//	MyCommon::GetProfileString(_T("conn"), _T("SERVICE_NAME"), _T("orcl"), _T("\\SYS\\hisdb.ini"))
+	//	);
+	//m_strHisDbConn = _T("Provider=OraOLEDB.Oracle.1;Persist Security Info=False;User ID=hisforbjlb;Password=bjlb2007;Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS =(PROTOCOL=TCP)(HOST=192.168.100.2)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl)));");
+	m_strHisDbConn.Format(_T("Provider=OraOLEDB.Oracle.1;Persist Security Info=False;User ID=%s;Password=%s;Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS =(PROTOCOL=TCP)(HOST=%s)(PORT=%s)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=%s)));"),
+		MyCommon::GetProfileString(_T("conn"), _T("USER_ID"), _T("hisforbjlb"), _T("\\SYS\\hisdb.ini")), 
+		MyCommon::GetProfileString(_T("conn"), _T("PASSWORD"), _T("bjlb2007"), _T("\\SYS\\hisdb.ini")),
+		MyCommon::GetProfileString(_T("conn"), _T("HOST"), _T("192.168.10.2"), _T("\\SYS\\hisdb.ini")),
+		MyCommon::GetProfileString(_T("conn"), _T("PORT"), _T("1521"), _T("\\SYS\\hisdb.ini")),
+		MyCommon::GetProfileString(_T("conn"), _T("SERVICE_NAME"), _T("orcl"), _T("\\SYS\\hisdb.ini"))
+		);
 
-	//生成HIS系统数据库连接字符串及读取病人表的查询语句
-	switch(m_nDbType)
-	{
-	case 0://Oracle
-		{
-			//ODBC方式
-			//m_strHisDbConn.Format(_T("DSN=%s;"), 
-			//	MyCommon::GetProfileString(
-			//	_T("conn"), _T("DSN"), _T("NurseHisDb"), _T("\\SYS\\hisdb.ini")).Trim());
-			
-			//OLEDB方式
-			//Provider=OraOLEDB.Oracle.1
-			//Provider=MSDAORA.1
-			//m_strHisDbConn.Format(_T("Provider=OraOLEDB.Oracle.1;Persist Security Info=False;User ID=%s;Password=%s;hos=%s;port=%s;Data Source=%s;"), 
-			//m_strHisDbConn.Format(_T("Provider=OraOLEDB.Oracle.1;Persist Security Info=False;User ID=%s;Password=%s;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=%s)(PORT=%s))(CONNECT_DATA=(SERVER_NAME=%s)));"), 
-			m_strHisDbConn.Format(_T("Provider=OraOLEDB.Oracle.1;Persist Security Info=False;User ID=%s;Password=%s;Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS =(PROTOCOL=TCP)(HOST=%s)(PORT=%s)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=%s)));"),
-				MyCommon::GetProfileString(_T("conn"), _T("USER_ID"), _T("hisforbjlb"), _T("\\SYS\\hisdb.ini")), 
-				MyCommon::GetProfileString(_T("conn"), _T("PASSWORD"), _T("bjlb2007"), _T("\\SYS\\hisdb.ini")),
-				MyCommon::GetProfileString(_T("conn"), _T("HOST"), _T("192.168.1.10"), _T("\\SYS\\hisdb.ini")),
-				MyCommon::GetProfileString(_T("conn"), _T("PORT"), _T("1521"), _T("\\SYS\\hisdb.ini")),
-				MyCommon::GetProfileString(_T("conn"), _T("SERVICE_NAME"), _T("orcl"), _T("\\SYS\\hisdb.ini"))
-				);
 
-			if(m_nDataReadMode == 0)
-			{
-				m_strQueryPatient = _T("SELECT * FROM (SELECT serial_id,reg_id,id_card,queue_num,patient_name,patient_gender,patient_birth,id_depart,time,id_doctor,id_item,in_flag FROM HisForBjlb_Patient P WHERE time>to_date(to_char(sysdate,'yyyymmdd'),'yyyymmdd') ORDER BY time DESC) WHERE rownum<500");
-			}
-			else
-			{
-				m_strQueryPatient = _T("SELECT serial_id,reg_id,id_card,queue_num,patient_name,patient_gender,patient_birth,id_depart,time,id_doctor,id_item,in_flag FROM HisForBjlb_Patient P WHERE time>to_date(to_char(sysdate,'yyyymmdd'),'yyyymmdd') ORDER BY time DESC");
-			}
-		}
-		break;
-	case 1://SQL Server
-		{
-			CString strInstName = MyCommon::GetProfileString(_T("conn"), _T("SERVICE_NAME"), _T(""), _T("\\SYS\\hisdb.ini"));
-			if(!strInstName.IsEmpty())
-			{
-				strInstName = _T("\\") + strInstName;
-			}
-			m_strHisDbConn.Format(_T("Driver={%s};Server=%s;Uid=%s;Pwd=%s;Database=Nurse;"),
-				MyCommon::GetProfileString(_T("conn"), _T("DRIVER"), _T("SQL Server"), _T("\\SYS\\hisdb.ini")), 
-				MyCommon::GetProfileString(_T("conn"), _T("HOST"), _T("192.168.1.10"), _T("\\SYS\\hisdb.ini")) + strInstName, 
-				MyCommon::GetProfileString(_T("conn"), _T("USER_ID"), _T("hisforbjlb"), _T("\\SYS\\hisdb.ini")), 
-				MyCommon::GetProfileString(_T("conn"), _T("PASSWORD"), _T("bjlb2007"), _T("\\SYS\\hisdb.ini"))
-				);
-
-			if(m_nDataReadMode == 0)
-			{
-				m_strQueryPatient = _T("SELECT TOP 500 serial_id,reg_id,id_card,queue_num,patient_name,patient_gender,patient_birth,id_depart,time,id_doctor,id_item,in_flag FROM HisForBjlb_Patient P WHERE time>cast(CONVERT(varchar(100),GETDATE(),23) as datetime) ORDER BY time DESC");
-			}
-			else
-			{
-				m_strQueryPatient = _T("SELECT serial_id,reg_id,id_card,queue_num,patient_name,patient_gender,patient_birth,id_depart,time,id_doctor,id_item,in_flag FROM HisForBjlb_Patient P WHERE time>cast(CONVERT(varchar(100),GETDATE(),23) as datetime) ORDER BY time DESC");
-			}
-		}
-		break;
-	default:
-		{
-			m_strHisDbConn = _T("");
-		}
-	}
+	//m_strHisDbConn.Format(_T("DSN=%s;"), 
+	//	MyCommon::GetProfileString(
+	//	_T("conn"), _T("DSN"), _T("NurseHisDb"), _T("\\SYS\\hisdb.ini")).Trim());
 
 	//WriteLog::Write(m_strHisDbConnStr);
-	//WriteLog::Write(m_strQueryPatient);
-
 	m_nHisDays = MyCommon::GetProfileInt(
 		_T("data"), _T("DATA_DAYS"), 0, _T("\\SYS\\hisdb.ini"));
 	if(m_nHisDays < 0)
 	{
 		m_nHisDays = 0;
 	}
-
-	m_nDataReadMode = MyCommon::GetProfileInt(
-		_T("sys"), _T("DATA_READ_MODE"), 0, _T("\\SYS\\sys.ini"));
-
-	
 }
 
 void CReadHis::LoadMap()
@@ -1119,4 +1095,14 @@ void CReadHis::LoadMap()
 			WriteLog::WriteTimeErrLog(strErr);
 		}
 	}
+	//POSITION pos = m_mapItemDepart.GetStartPosition();
+	//CString strKey;
+	//CString strValue;
+	//CString strOut;
+	//for(; pos; )
+	//{
+	//	m_mapItemDepart.GetNextAssoc(pos, strKey, strValue);
+	//	strOut += strKey + _T(" : ") + strValue + _T("\r\n");
+	//}
+	//WriteLog::Write(strOut);
 }
