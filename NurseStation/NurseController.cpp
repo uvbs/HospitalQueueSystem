@@ -472,13 +472,33 @@ void CNurseController::OnCall(LPDOCTORCMD pDoctorCmd, LPSOCKADDR_IN psockddr)
 				//CString str = GetFirstInLinePatientSelectString(strDoctorID, docInfo.bExpertFlag);
 				//AfxMessageBox(str);
 				rset.Open(GetFirstInLinePatientSelectString(strDoctorID, docInfo.bExpertFlag));
-				if(!rset.IsBOF())
+				//if(!rset.IsBOF())
+				//{
+				//	rset.Edit();
+				//	rset.SetFieldValue(_T("status"), qsDoing);
+				//	rset.SetFieldValue(_T("doctor_id"), strDoctorID);
+				//	rset.Update();
+				//	rset.GetFieldValue(_T("log_id"), strQueSerialID);  
+				//}
+				CADORecordset rset2(&db);
+				CString strSelExist;
+				for(; !rset.IsBOF(); rset.MoveNext())
 				{
+					CString strPatientId;
+					rset.GetFieldValue(_T("patient_id"), strPatientId);
+					strSelExist.Format(_T("select log_id from Queue where patient_id='%s' and (status=%d or status=%d) and %s;"),
+						strPatientId, qsDoing, qsPrepare, m_strSqlDate);
+					rset2.Open(strSelExist, CADORecordset::openQuery);
+					if(!rset2.IsBOF())
+					{
+						continue;
+					}
 					rset.Edit();
 					rset.SetFieldValue(_T("status"), qsDoing);
 					rset.SetFieldValue(_T("doctor_id"), strDoctorID);
 					rset.Update();
-					rset.GetFieldValue(_T("log_id"), strQueSerialID);  
+					rset.GetFieldValue(_T("log_id"), strQueSerialID);
+					break;
 				}
 			}
 			rset.Close();
@@ -583,14 +603,35 @@ BOOL CNurseController::CallWait(DOCTORBASICINFO& docInfo)
 			//	,docInfo.strDoctorID ,docInfo.bExpertFlag ? _T("Q.doctor_id=D.doctor_id") : _T("(Q.doctor_id is null or Q.doctor_id='' or Q.doctor_id=D.doctor_id)"), qsInLine, m_strSqlDate);
 			//rset.Open(strSql);
 			rset.Open(GetFirstInLinePatientSelectString(docInfo.strDoctorID, docInfo.bExpertFlag));
-			if(!rset.IsBOF())
+			//if(!rset.IsBOF())
+			//{
+			//	rset.Edit();
+			//	rset.SetFieldValue(_T("status"), qsPrepare);
+			//	rset.SetFieldValue(_T("doctor_id"), docInfo.strDoctorID);
+			//	rset.Update();
+			//	rset.GetFieldValue(_T("log_id"), strSerialId);
+			//}
+			CADORecordset rset2(&db);
+			CString strSelExist;
+			for(; !rset.IsBOF(); rset.MoveNext())
 			{
+				CString strPatientId;
+				rset.GetFieldValue(_T("patient_id"), strPatientId);
+				strSelExist.Format(_T("select log_id from Queue where patient_id='%s' and (status=%d or status=%d) and %s;"),
+					strPatientId, qsDoing, qsPrepare, m_strSqlDate);
+				rset2.Open(strSelExist, CADORecordset::openQuery);
+				if(!rset2.IsBOF())
+				{
+					continue;
+				}
 				rset.Edit();
 				rset.SetFieldValue(_T("status"), qsPrepare);
 				rset.SetFieldValue(_T("doctor_id"), docInfo.strDoctorID);
 				rset.Update();
 				rset.GetFieldValue(_T("log_id"), strSerialId);
+				break;
 			}
+
 			rset.Close();
 
 			if(!strSerialId.IsEmpty())
@@ -786,14 +827,35 @@ void CNurseController::OnWait(LPDOCTORCMD pDoctorCmd, LPSOCKADDR_IN psockddr)
 				//strSql.Format(_T("Select top 1 Q.log_id,Q.status,Q.doctor_id from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and %s and status=%d and %s order by Q.priority desc, Q.regtime;")
 				//	,strDoctorID ,docInfo.bExpertFlag ? _T("Q.doctor_id=D.doctor_id") : _T("(Q.doctor_id is null or Q.doctor_id='' or Q.doctor_id=D.doctor_id)"), qsInLine, m_strSqlDate);
 				rset.Open(GetFirstInLinePatientSelectString(strDoctorID, docInfo.bExpertFlag));
-				if(!rset.IsBOF())
+				//if(!rset.IsBOF())
+				//{
+				//	rset.Edit();
+				//	rset.SetFieldValue(_T("status"), qsPrepare);
+				//	rset.SetFieldValue(_T("doctor_id"), strDoctorID);
+				//	rset.Update();
+				//	rset.GetFieldValue(_T("log_id"), strSerialID);
+				//}
+				CADORecordset rset2(&db);
+				CString strSelExist;
+				for(; !rset.IsBOF(); rset.MoveNext())
 				{
+					CString strPatientId;
+					rset.GetFieldValue(_T("patient_id"), strPatientId);
+					strSelExist.Format(_T("select log_id from Queue where patient_id='%s' and (status=%d or status=%d) and %s;"),
+						strPatientId, qsDoing, qsPrepare, m_strSqlDate);
+					rset2.Open(strSelExist, CADORecordset::openQuery);
+					if(!rset2.IsBOF())
+					{
+						continue;
+					}
 					rset.Edit();
 					rset.SetFieldValue(_T("status"), qsPrepare);
 					rset.SetFieldValue(_T("doctor_id"), strDoctorID);
 					rset.Update();
 					rset.GetFieldValue(_T("log_id"), strSerialID);
+					break;
 				}
+
 				rset.Close();
 				db.Close();
 			}
@@ -3259,7 +3321,7 @@ CString CNurseController::GetFirstInLinePatientSelectString(CString strDoctorID,
 {
 	CString strSql;
 	//一个医生只处理一个科室
-	strSql.Format(_T("Select top 1 Q.log_id,Q.status,Q.doctor_id from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and %s and status=%d and %s order by Q.priority desc, Q.regtime;")
+	strSql.Format(_T("Select top 10 Q.log_id,Q.patient_id,Q.status,Q.doctor_id from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and %s and status=%d and %s order by Q.priority desc, Q.regtime;")
 		,strDoctorID, isExpert ? _T("Q.doctor_id=D.doctor_id") : _T("(Q.doctor_id is null or Q.doctor_id='' or Q.doctor_id=D.doctor_id)"), qsInLine, m_strSqlDate);
 
 	//一个医生可处理多个科室
@@ -3272,7 +3334,7 @@ CString CNurseController::GetFirstInLinePatientSelectString(CString strDoctorID,
 	//{
 	//	strDoctorStr.Format(_T("(doctor_id is null or doctor_id='' or doctor_id='%s')"), strDoctorID);
 	//}
-	//strSql.Format(_T("Select top 1 log_id,status,doctor_id from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and %s and status=%d and %s order by priority desc, regtime;")
+	//strSql.Format(_T("Select top 1 log_id,Q.patient_id,status,doctor_id from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and %s and status=%d and %s order by priority desc, regtime;")
 	//	,strDoctorID ,strDoctorStr, qsInLine, m_strSqlDate);
 
 	return strSql;

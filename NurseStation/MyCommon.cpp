@@ -360,7 +360,7 @@ BOOL MyCommon::GetRegString(HKEY hKeyRoot, CString strSubKey,
 	HKEY hKey;
 	LONG ret = ::RegOpenKeyEx(hKeyRoot, 
 		strSubKey, 0, KEY_READ, &hKey);
-	if(ERROR_SUCCESS £¡= ret)
+	if(ERROR_SUCCESS != ret)
 	{
 		return FALSE;
 	}

@@ -1121,13 +1121,13 @@ BOOL CMainFrame::WriteDataToMyQueue()
 		CString sql=_T("");
 		//sql.Format(_T("select h.serial_id,h.patient_name,h.queue_num,h.id_depart,h.id_doctor,h.time,h.patient_gender,h.id_item,h.item_desc,h.in_flag,h.read_flag,o.name officename,o.call_id from HisForBjlb_Patient h left join Office o on o.office_id=h.id_depart left join Doctor d on h.id_doctor=d.doctor_id where h.time>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime) and (h.read_flag is null or h.read_flag=0) and h.serial_id not in (select log_id from Queue) and h.id_depart in(select office_id from Nurse_Office where Nurse_id='%s') order by h.time"),
 		//	theApp.GetController()->GetDataDays(), theApp.GetLoginID());
-		sql.Format(_T("select P.serial_id,P.reg_id,P.queue_num,P.patient_name,P.id_depart,P.id_doctor,P.time,P.patient_gender,P.patient_birth,P.id_item,I.name item_desc,P.in_flag from HisForBjlb_Patient P left join Item I on P.id_item=I.id where P.time>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime) and (P.read_flag is null or P.read_flag=0) and P.serial_id not in (select log_id from Queue) and P.id_depart in(select office_id from Nurse_Office where Nurse_id='%s') %s order by P.time"),
+		sql.Format(_T("select P.serial_id,P.reg_id,P.queue_num,P.patient_id,P.patient_name,P.id_depart,P.id_doctor,P.time,P.patient_gender,P.patient_birth,P.id_item,I.name item_desc,P.in_flag from HisForBjlb_Patient P left join Item I on P.id_item=I.id where P.time>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime) and (P.read_flag is null or P.read_flag=0) and P.serial_id not in (select log_id from Queue) and P.id_depart in(select office_id from Nurse_Office where Nurse_id='%s') %s order by P.time"),
 			theApp.GetController()->GetDataDays(), theApp.GetLoginID(),  theApp.GetController()->GetReadInFlag() ? _T("") : _T("and (in_flag<>1 or in_flag is null)"));
 		try
 		{
 			rset.Open(sql,CADORecordset::openQuery);
 			CString strSql=_T("");
-			CString strSerialId, strRegId,strPatientName,strIdDepart,strIdDoctor,
+			CString strSerialId, strRegId,strPatientId,strPatientName,strIdDepart,strIdDoctor,
 				strTime,strQueueNum,strPatientBirth,strIdItem,strItemDesc;
 			int nPatientGender = genderNone,nInflag = 0;
 
@@ -1140,10 +1140,8 @@ BOOL CMainFrame::WriteDataToMyQueue()
 					rset.GetFieldValue(_T("serial_id"),strSerialId);
 					rset.GetFieldValue(_T("reg_id"),strRegId);
 					rset.GetFieldValue(_T("queue_num"),strQueueNum);
+					rset.GetFieldValue(_T("patient_id"),strPatientId);
 					rset.GetFieldValue(_T("patient_name"),strPatientName);
-					rset.GetFieldValue(_T("id_depart"),strIdDepart);
-					rset.GetFieldValue(_T("id_doctor"),strIdDoctor);
-					rset.GetFieldValue(_T("time"),strTime);
 					if(rset.IsFieldNull(_T("patient_gender")))
 					{
 						nPatientGender = genderNone;
@@ -1153,6 +1151,9 @@ BOOL CMainFrame::WriteDataToMyQueue()
 						rset.GetFieldValue(_T("patient_gender"),nPatientGender);
 					}
 					rset.GetFieldValue(_T("patient_birth"),strPatientBirth);
+					rset.GetFieldValue(_T("id_depart"),strIdDepart);
+					rset.GetFieldValue(_T("id_doctor"),strIdDoctor);
+					rset.GetFieldValue(_T("time"),strTime);
 					rset.GetFieldValue(_T("id_item"), strIdItem);
 					rset.GetFieldValue(_T("item_desc"), strItemDesc);
 
@@ -1170,8 +1171,8 @@ BOOL CMainFrame::WriteDataToMyQueue()
 					WriteLog::WriteDbErrLog(_T("CMainFrame::WriteDataToMyQueue: GetFieldValue"));
 				}
 
-				strSql.Format(_T("insert into Queue(log_id,reg_id,queue_id_call,patient_name,office_id,doctor_id,regtime,patient_birth,id_item,item_desc,patient_gender,status,priority,in_flag) values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,%d)"),
-					strSerialId,strRegId,strQueueNum,strPatientName,strIdDepart,strIdDoctor,strTime,strPatientBirth,strIdItem,strItemDesc,nPatientGender,qsInLine,priZero,nInflag);
+				strSql.Format(_T("insert into Queue(log_id,reg_id,queue_id_call,patient_id,patient_name,office_id,doctor_id,regtime,patient_birth,id_item,item_desc,patient_gender,status,priority,in_flag) values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,%d,%d,%d)"),
+					strSerialId,strRegId,strQueueNum,strPatientId,strPatientName,strIdDepart,strIdDoctor,strTime,strPatientBirth,strIdItem,strItemDesc,nPatientGender,qsInLine,priZero,nInflag);
 				try
 				{
 					db.Execute(strSql);

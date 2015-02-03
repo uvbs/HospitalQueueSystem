@@ -575,13 +575,14 @@ void CNurseView::OnCbnSelchangeComQuename()
 	}
 }
 
+/*
 int CNurseView::NoHisWriteDataToQueue(CString strSerialId)
 {
 	m_editQueueNum.SetWindowText(_T(""));
 	CMainFrame* pMainFrame=((CNurseStationApp*)AfxGetApp())->m_pNurseWnd;
 	
-	CString deptName=_T("");
-	m_que_patname.GetWindowText(deptName);
+	CString strPatientName=_T("");
+	m_que_patname.GetWindowText(strPatientName);
 	CString que_paitOfficeID=_T("");
 	m_comex_quename.GetLBText(m_comex_quename.GetCurSel(),que_paitOfficeID);
 	DOCTOCOMBOINFO docinfo;
@@ -718,6 +719,7 @@ int CNurseView::NoHisWriteDataToQueue(CString strSerialId)
 					judge=NumStart<=NumEnd && NumEnd>=NumStart &&
 						queNumber<AmLimit;
 				}
+
 				if(judge)
 				{
 					if(NumStart<1000&&NumStart>0)
@@ -740,16 +742,20 @@ int CNurseView::NoHisWriteDataToQueue(CString strSerialId)
 						call_id = m_strQueueNum;
 					}
 
-					if(docID!=_T(""))
-					{
-						insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s',getdate(),%d,%d,'%s')"),
-							log_ID,log_ID,NumStart,deptName,Queue,docID,qsInLine,priZero,call_id);
-					}
-					else
-					{
-						insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_name,office_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s',getdate(),%d,%d,'%s')"),
-							log_ID,log_ID,NumStart,deptName,Queue,qsInLine,priZero,call_id);
-					}
+					//if(docID!=_T(""))
+					//{
+					//	insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s','%s',getdate(),%d,%d,'%s')"),
+					//		log_ID,log_ID,NumStart,log_ID,strPatientName,Queue,docID,qsInLine,priZero,call_id);
+					//}
+					//else
+					//{
+					//	insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_id,patient_name,office_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s',getdate(),%d,%d,'%s')"),
+					//		log_ID,log_ID,NumStart,log_ID,strPatientName,Queue,qsInLine,priZero,call_id);
+					//}
+
+					insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s','%s',getdate(),%d,%d,'%s')"),
+						log_ID,log_ID,NumStart,log_ID,strPatientName,Queue,docID.IsEmpty()? _T("null"):_T("'")+docID+_T("'"),qsInLine,priZero,call_id);
+
 					try
 					{
 						db.Execute(insertSql);
@@ -845,16 +851,20 @@ int CNurseView::NoHisWriteDataToQueue(CString strSerialId)
 						call_id = m_strQueueNum;
 					}
 
-					if(docID!=_T(""))
-					{
-						insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s',getdate(),%d,%d,'%s')"),
-							log_ID,log_ID,NumStart,deptName,Queue,docID,qsInLine,priZero,call_id);
-					}
-					else
-					{
-						insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_name,office_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s',getdate(),%d,%d,'%s')"),
-							log_ID,log_ID,NumStart,deptName,Queue,qsInLine,priZero,call_id);
-					}
+					//if(docID!=_T(""))
+					//{
+					//	insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s',getdate(),%d,%d,'%s')"),
+					//		log_ID,log_ID,NumStart,strPatientName,Queue,docID,qsInLine,priZero,call_id);
+					//}
+					//else
+					//{
+					//	insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_name,office_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s',getdate(),%d,%d,'%s')"),
+					//		log_ID,log_ID,NumStart,strPatientName,Queue,qsInLine,priZero,call_id);
+					//}
+
+					insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s','%s',getdate(),%d,%d,'%s')"),
+						log_ID,log_ID,NumStart,log_ID,strPatientName,Queue,docID.IsEmpty()? _T("null"):_T("'")+docID+_T("'"),qsInLine,priZero,call_id);
+
 					try
 					{
 						db.Execute(insertSql);
@@ -924,7 +934,263 @@ int CNurseView::NoHisWriteDataToQueue(CString strSerialId)
 	}
 	return 0;
 }
+*/
 
+int CNurseView::NoHisWriteDataToQueue(CString strSerialId)
+{
+	m_editQueueNum.SetWindowText(_T(""));
+	CMainFrame* pMainFrame=((CNurseStationApp*)AfxGetApp())->m_pNurseWnd;
+
+	CString strPatientName=_T("");
+	m_que_patname.GetWindowText(strPatientName);
+	CString que_paitOfficeID=_T("");
+	m_comex_quename.GetLBText(m_comex_quename.GetCurSel(),que_paitOfficeID);
+	DOCTOCOMBOINFO docinfo;
+	int index=m_com_quedocname.GetCurSel();
+	if(index!=CB_ERR)
+	{
+		docinfo=m_mapto_combo[index];
+	}
+	//排队的科室ID和医生ID
+	CString Queue=m_pool.RequestBracket(que_paitOfficeID);
+	CString officeName = m_pool.DeleRequest(que_paitOfficeID);
+
+	CString docID=docinfo.docid;
+
+	//插入sql语句
+	CString insertSql=_T("");
+
+	//排队
+	CString Queue_id=_T("");//系统排队号码
+	CString call_id=_T("");//id前缀
+	int NumStart;//开始排队号码
+	int NumEnd;//结束号码
+	int AmLimit;//上午限制人数
+	int PmLimit;//下午限制人数
+	int DayLimit;//整天限制人数
+	CString C_NumStart=_T("");
+	int queNumber;//实际排队人数
+	CString queue_id_his=_T("");
+	//生成唯一ID
+
+
+	//上午下午人数限制
+	CTime CurrentTime=CTime::GetCurrentTime();
+	int year=CurrentTime.GetYear();
+	int month=CurrentTime.GetMonth();
+	int day=CurrentTime.GetDay();
+	CTime AmTime(year,month,day,12,0,0);
+	CTime PmTime(year,month,day,23,59,59);
+	//用于排队的类
+	CNurseOfficeQueue office;
+
+	int nTodayCount = 0;
+
+	//获取当前对应科室中数据
+	POSITION pos=pMainFrame->GetPatientView()->m_list_office.GetHeadPosition();
+	while(pos!=NULL)
+	{
+		POSITION posLast=pos;
+		office=pMainFrame->GetPatientView()->m_list_office.GetNext(pos);
+		if(office.GetQueID()!=Queue) continue;
+
+
+		CADODatabase db;
+		db.SetConnectionString(pMainFrame->m_strConn);
+		try
+		{
+			db.Open();
+		}
+		catch (_com_error& e)
+		{
+			WriteLog::WriteDbErrLog(_T("CNurseView::NoHisWriteDataToQueue"));
+			return 1;//数据库错误
+		}
+
+		CADORecordset rset(&db);
+
+
+		CString log_ID;
+		if(strSerialId.IsEmpty())
+		{
+			log_ID=GetOnlyID();//获取新就诊号
+		}
+		else
+		{
+			CString sql;
+			sql.Format(_T("select log_id from queue where log_id='%s'"),
+				strSerialId);
+			try
+			{
+				rset.Open(sql,CADORecordset::openQuery);
+				if(rset.IsBOF())
+				{
+					log_ID = strSerialId;
+				}
+				else
+				{
+					rset.Close();
+					return 2;//输入的就诊号已存在
+				}
+				rset.Close();
+			}
+			catch (_com_error& e)
+			{
+				return 1;//数据库错误
+			}
+		}
+
+		CString sql;
+		sql.Format(_T("select count(log_id) from queue where office_id='%s' and regtime>cast(CONVERT(varchar(100),GETDATE(),23) as datetime)"),
+			Queue);
+		try
+		{
+			rset.Open(sql,CADORecordset::openQuery);
+			rset.GetFieldValue(0, nTodayCount);
+			rset.Close();
+		}
+		catch (_com_error& e)
+		{
+			return 1;//数据库错误
+		}
+
+		//NumStart=office.GetQuenumStart();
+		NumStart = nTodayCount + 1;
+		NumEnd=office.GetQuenumEnd();
+		if(NumEnd <= 0)
+		{
+			NumEnd = 100000;
+		}
+		AmLimit=office.GetAmLimitPatient();
+		PmLimit=office.GetPmLimitPatient();
+		DayLimit=office.GetDayLimitPatient();
+		queNumber=office.GetQueNumber();//实际排队人数
+		call_id=office.GetQueCallID();
+
+		BOOL judge=FALSE;
+		if(CurrentTime<=AmTime)
+		{
+			
+			if(AmLimit<=0)
+			{
+				judge=NumStart<=NumEnd && queNumber<DayLimit && 
+					NumEnd>=NumStart;
+			}
+			else
+			{
+				judge=NumStart<=NumEnd && NumEnd>=NumStart &&
+					queNumber<AmLimit;
+			}
+		}
+		else if(CurrentTime<=PmTime)
+		{
+			if(PmLimit<=0)
+			{
+				judge=NumStart<=NumEnd && queNumber<DayLimit && 
+					NumEnd>=NumStart;
+			}
+			else
+			{
+				judge=NumStart<=NumEnd && NumEnd>=NumStart &&
+					queNumber<PmLimit;
+			}
+		}
+		if(!judge) continue;
+		if(NumStart<1000&&NumStart>0)
+		{
+			C_NumStart.Format(_T("%03d"), NumStart);
+
+		}
+		else if(NumStart<10000&&NumStart>=1000)
+		{
+			C_NumStart.Format(_T("%04d"), NumStart);
+		}
+		else
+		{
+			C_NumStart.Format(_T("%d"), NumStart);
+		}
+		call_id+=C_NumStart;
+
+		if(!m_strQueueNum.IsEmpty())
+		{
+			call_id = m_strQueueNum;
+		}
+
+		//if(docID!=_T(""))
+		//{
+		//	insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s','%s',getdate(),%d,%d,'%s')"),
+		//		log_ID,log_ID,NumStart,log_ID,strPatientName,Queue,docID,qsInLine,priZero,call_id);
+		//}
+		//else
+		//{
+		//	insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_id,patient_name,office_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s',getdate(),%d,%d,'%s')"),
+		//		log_ID,log_ID,NumStart,log_ID,strPatientName,Queue,qsInLine,priZero,call_id);
+		//}
+
+		insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s','%s',getdate(),%d,%d,'%s')"),
+			log_ID,log_ID,NumStart,log_ID,strPatientName,Queue,docID.IsEmpty()? _T("null"):_T("'")+docID+_T("'"),qsInLine,priZero,call_id);
+
+		try
+		{
+			db.Execute(insertSql);
+		}
+		catch (_com_error& e)
+		{
+			WriteLog::WriteDbErrLog(_T("CNurseView::NoHisWriteDataToQueue2"));
+			return 1;//数据库错误
+		}
+
+
+
+		//////////////////////////////////////打印
+		if(m_printer.m_isUsePrint)
+		{
+			EnumPrintStaus satus = m_printer.CheckPrinterStatus();
+			if(satus == enumPrintPrinting || satus == enumPrintNormal)
+			{
+				SLZData data;
+				data.SetSerialId(log_ID);
+				data.SetQueNum(call_id);
+				data.SetPatientName(strPatientName);
+				data.SetTakingNumTime(CTime::GetCurrentTime());
+				data.SetDoctorName(docinfo.docname);
+				data.SetOfficeName(officeName);
+				m_printer.Print(data,GetQueNum(Queue));
+			}
+			else
+			{
+				switch(satus)
+				{
+				case enumPrintErr:
+					MessageBox(_T("打印机出现故障,请检查打印机硬件"),_T("注意"),
+						MB_OK|MB_ICONERROR);
+					break;
+				case enumPrintPaperOut:
+					MessageBox(_T("打印机缺纸"),_T("注意"),
+						MB_OK|MB_ICONERROR);
+					break;
+				case enumPrintOffline:
+					MessageBox(_T("打印机掉线"),_T("注意"),
+						MB_OK|MB_ICONERROR);
+					break;
+				case enumPrintNoDefPrinter:
+					MessageBox(_T("没有默认打印机"),_T("注意"),
+						MB_OK|MB_ICONERROR);
+					break;
+				}
+			}
+		}
+		//////////////////////////////////////
+
+		NumStart++;
+		queNumber++;
+		office.SetQuenumStart(NumStart);
+		office.SetQueNumber(queNumber);
+		pMainFrame->GetPatientView()->m_list_office.SetAt(posLast,office);
+		break;
+	}
+	return 0;
+}
 
 int CNurseView::GetSrand(const int &max)
 {
