@@ -357,25 +357,27 @@ BOOL MyCommon::WriteRegString(HKEY hKeyRoot, CString strSubKey,
 BOOL MyCommon::GetRegString(HKEY hKeyRoot, CString strSubKey, 
 							   CString strValueName, CString& strData)
 {
-	BOOL bRet = FALSE;
 	HKEY hKey;
 	LONG ret = ::RegOpenKeyEx(hKeyRoot, 
 		strSubKey, 0, KEY_READ, &hKey);
-	if(ERROR_SUCCESS == ret)
+	if(ERROR_SUCCESS £¡= ret)
 	{
-		WCHAR wszTemp[1024] = {0};
-		DWORD dType = REG_SZ;
-		DWORD dLength = 1024;
-		ret = ::RegQueryValueEx(hKey, strValueName, NULL, &dType, (LPBYTE)wszTemp, &dLength);
-		::RegCloseKey(hKey);
-		if(ERROR_SUCCESS == ret)
-		{
-			strData.Format(_T("%s"), wszTemp);
-			bRet = TRUE;
-		}
+		return FALSE;
 	}
 
-	return bRet;
+	WCHAR wszTemp[1024] = {0};
+	DWORD dType = REG_SZ;
+	DWORD dLength = 1024;
+	ret = ::RegQueryValueEx(hKey, strValueName, NULL, &dType, (LPBYTE)wszTemp, &dLength);
+	::RegCloseKey(hKey);
+	if(ERROR_SUCCESS != ret)
+	{
+		return FALSE;
+	}
+
+	strData.Format(_T("%s"), wszTemp);
+
+	return TRUE;
 }
 
 CString MyCommon::GetRegString(HKEY hKeyRoot, CString strSubKey, 
@@ -383,21 +385,7 @@ CString MyCommon::GetRegString(HKEY hKeyRoot, CString strSubKey,
 {
 	CString strData = _T("");
 
-	HKEY hKey;
-	LONG ret = ::RegOpenKeyEx(hKeyRoot, 
-		strSubKey, 0, KEY_READ, &hKey);
-	if(ERROR_SUCCESS == ret)
-	{
-		WCHAR wszTemp[1024] = {0};
-		DWORD dType = REG_SZ;
-		DWORD dLength = 1024;
-		ret = ::RegQueryValueEx(hKey, strValueName, NULL, &dType, (LPBYTE)wszTemp, &dLength);
-		::RegCloseKey(hKey);
-		if(ERROR_SUCCESS == ret)
-		{
-			strData.Format(_T("%s"), wszTemp);
-		}
-	}
+	GetRegString(hKeyRoot, strSubKey, strValueName, strData);
 
 	return strData;
 }
