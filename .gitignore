@@ -1,6 +1,8 @@
 Thumbs.db
 *.obj
 *.exe
+!QueSystemRegister.exe
+!CassiniDev.exe
 *.pdb
 *.aps
 *.pch
@@ -20,6 +22,7 @@ Thumbs.db
 [Dd]ebug*/
 *.lib
 !jTTS_ML.lib
+!QueSystemLicense.lib
 *.sbr
 obj/
 [Rr]elease*/

@@ -491,6 +491,7 @@ void CNurseController::OnCall(LPDOCTORCMD pDoctorCmd, LPSOCKADDR_IN psockddr)
 					rset2.Open(strSelExist, CADORecordset::openQuery);
 					if(!rset2.IsBOF())
 					{
+						rset2.Close();
 						continue;
 					}
 					rset.Edit();
@@ -498,6 +499,8 @@ void CNurseController::OnCall(LPDOCTORCMD pDoctorCmd, LPSOCKADDR_IN psockddr)
 					rset.SetFieldValue(_T("doctor_id"), strDoctorID);
 					rset.Update();
 					rset.GetFieldValue(_T("log_id"), strQueSerialID);
+
+					rset2.Close();
 					break;
 				}
 			}
@@ -3321,8 +3324,14 @@ CString CNurseController::GetFirstInLinePatientSelectString(CString strDoctorID,
 {
 	CString strSql;
 	//一个医生只处理一个科室
-	strSql.Format(_T("Select top 10 Q.log_id,Q.patient_id,Q.status,Q.doctor_id from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and %s and status=%d and %s order by Q.priority desc, Q.regtime;")
-		,strDoctorID, isExpert ? _T("Q.doctor_id=D.doctor_id") : _T("(Q.doctor_id is null or Q.doctor_id='' or Q.doctor_id=D.doctor_id)"), qsInLine, m_strSqlDate);
+	//strSql.Format(_T("Select top 10 Q.log_id,Q.patient_id,Q.status,Q.doctor_id from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and %s and status=%d and %s order by Q.priority desc, Q.regtime;")
+	//	,strDoctorID, isExpert ? _T("Q.doctor_id=D.doctor_id") : _T("(Q.doctor_id is null or Q.doctor_id='' or Q.doctor_id=D.doctor_id)"), qsInLine, m_strSqlDate);
+
+	//strSql.Format(_T("Select top 10 log_id,Q.patient_id,status,doctor_id from Queue where office_id in (select office_id from Doctor where doctor_id='%s') and %s and status=%d and %s order by priority desc, regtime;"),
+	//	strDoctorID,
+	//	isExpert ? _T("doctor_id='")+strDoctorID+_T("'") : _T("(doctor_id is null or doctor_id='' or doctor_id='")+strDoctorID+_T("')"), 
+	//	qsInLine,
+	//	m_strSqlDate);
 
 	//一个医生可处理多个科室
 	//CString strDoctorStr;
@@ -3334,8 +3343,17 @@ CString CNurseController::GetFirstInLinePatientSelectString(CString strDoctorID,
 	//{
 	//	strDoctorStr.Format(_T("(doctor_id is null or doctor_id='' or doctor_id='%s')"), strDoctorID);
 	//}
-	//strSql.Format(_T("Select top 1 log_id,Q.patient_id,status,doctor_id from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and %s and status=%d and %s order by priority desc, regtime;")
+	//strSql.Format(_T("Select top 10 log_id,patient_id,status,doctor_id from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and %s and status=%d and %s order by priority desc, regtime;")
 	//	,strDoctorID ,strDoctorStr, qsInLine, m_strSqlDate);
+
+	strSql.Format(_T("Select top 10 log_id,patient_id,status,doctor_id from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and %s and status=%d and %s order by priority desc, regtime;"),
+		strDoctorID,
+		isExpert ? _T("doctor_id='")+strDoctorID+_T("'") : _T("(doctor_id is null or doctor_id='' or doctor_id='")+strDoctorID+_T("')"), 
+		qsInLine,
+		m_strSqlDate);
+
+	//AfxMessageBox(strSql);
+	//WriteLog::Write(strSql);
 
 	return strSql;
 }

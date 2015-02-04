@@ -21,20 +21,14 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1BA35608757941D5951B134054BF6B70"
+        "OwnerKey" = "8:_2595C88F6E09421EA86E165D21C3FFD0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2595C88F6E09421EA86E165D21C3FFD0"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2637464AF6C94A87A147313E073FF083"
-        "OwnerKey" = "8:_86646738BDBB433080F1C0A94BD1FC96"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2CF2E38A112579830F347BB7086428E6"
-        "OwnerKey" = "8:_2595C88F6E09421EA86E165D21C3FFD0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,7 +45,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6814CA403629A9FF660B65B802746243"
+        "MsmKey" = "8:_5739379A1E2FED26E2F12F532F366820"
         "OwnerKey" = "8:_2595C88F6E09421EA86E165D21C3FFD0"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -63,19 +57,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_733FCE700DB80CBD0B8BC5D55354093A"
+        "MsmKey" = "8:_6F17969D4F7C4257A96C704E6802BD2B"
         "OwnerKey" = "8:_2595C88F6E09421EA86E165D21C3FFD0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_83B7B0369F2043FF9BB075C4C19B2212"
-        "OwnerKey" = "8:_2595C88F6E09421EA86E165D21C3FFD0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_86646738BDBB433080F1C0A94BD1FC96"
+        "MsmKey" = "8:_870BB1EE9C564E981AED768D5BD078B1"
         "OwnerKey" = "8:_2595C88F6E09421EA86E165D21C3FFD0"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -89,6 +77,12 @@
         {
         "MsmKey" = "8:_9942AC933E3B46A8A4100F6587F11F00"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9A825C474594131237EF8C67365CB235"
+        "OwnerKey" = "8:_2595C88F6E09421EA86E165D21C3FFD0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -141,12 +135,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_BCC85917A70649039EDC1C3E09DF0B11"
-        "OwnerKey" = "8:_2595C88F6E09421EA86E165D21C3FFD0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_CF59350439444CA2A4FB3E673A1BAF4E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -185,12 +173,6 @@
         {
         "MsmKey" = "8:_F472319A27B24A3EB04CDBB05B5FDFF2"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F5FD844B65B04322B160060D7FB8F690"
-        "OwnerKey" = "8:_83B7B0369F2043FF9BB075C4C19B2212"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -262,18 +244,13 @@
         "InstallerBootstrapper" = "3:2"
             "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
             {
-            "Enabled" = "11:TRUE"
+            "Enabled" = "11:FALSE"
             "PromptEnabled" = "11:TRUE"
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5"
-                    {
-                    "Name" = "8:.NET Framework 3.5"
-                    "ProductCode" = "8:Microsoft.Net.Framework.3.5"
-                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
                     "Name" = "8:Windows Installer 3.1"
@@ -302,7 +279,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "Version" = "8:3.5.21022"
+                "FrameworkVersion" = "8:3.5.21022"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
                 }
@@ -328,26 +305,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2CF2E38A112579830F347BB7086428E6"
-            {
-            "SourcePath" = "8:QueSystemLicense.dll"
-            "TargetName" = "8:QueSystemLicense.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1879BD6B9DDD479B90897ED72A7DFD50"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3696DC6B22004359AD06B7B8A42BB447"
@@ -390,10 +347,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6814CA403629A9FF660B65B802746243"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5739379A1E2FED26E2F12F532F366820"
             {
-            "SourcePath" = "8:msado15.dll"
-            "TargetName" = "8:msado15.dll"
+            "SourcePath" = "8:QueSystemLicense.dll"
+            "TargetName" = "8:QueSystemLicense.dll"
             "Tag" = "8:"
             "Folder" = "8:_1879BD6B9DDD479B90897ED72A7DFD50"
             "Condition" = "8:"
@@ -430,7 +387,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_733FCE700DB80CBD0B8BC5D55354093A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_870BB1EE9C564E981AED768D5BD078B1"
             {
             "SourcePath" = "8:MSIMG32.dll"
             "TargetName" = "8:MSIMG32.dll"
@@ -488,6 +445,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A825C474594131237EF8C67365CB235"
+            {
+            "SourcePath" = "8:jTTS_ML.dll"
+            "TargetName" = "8:jTTS_ML.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1879BD6B9DDD479B90897ED72A7DFD50"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B9D55B10AE44243AC5E1B281EFA0E55"
@@ -648,26 +625,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BCC85917A70649039EDC1C3E09DF0B11"
-            {
-            "SourcePath" = "8:jTTS_ML.dll"
-            "TargetName" = "8:jTTS_ML.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1879BD6B9DDD479B90897ED72A7DFD50"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CF59350439444CA2A4FB3E673A1BAF4E"
@@ -997,8 +954,9 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:NurseStation"
         "ProductCode" = "8:{E50E39C6-607D-4B08-B687-42A3920A5BF3}"
-        "PackageCode" = "8:{A4E41A3C-EF01-4EBF-AB7D-FF81215971B7}"
+        "PackageCode" = "8:{006FE11A-9A9B-4B52-917B-3171C9400595}"
         "UpgradeCode" = "8:{4B359E42-781B-4E93-8A32-AE71A7F0FAB1}"
+        "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
@@ -1540,11 +1498,11 @@
         }
         "MergeModule"
         {
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_2637464AF6C94A87A147313E073FF083"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_1BA35608757941D5951B134054BF6B70"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:microsoft_vc90_mfc_x86.msm"
+            "SourcePath" = "8:Microsoft_VC100_CRT_x86.msm"
                 "Properties"
                 {
                 }
@@ -1554,39 +1512,11 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_83B7B0369F2043FF9BB075C4C19B2212"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_6F17969D4F7C4257A96C704E6802BD2B"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:policy_9_0_Microsoft_VC90_CRT_x86.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_86646738BDBB433080F1C0A94BD1FC96"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:policy_9_0_Microsoft_VC90_MFC_x86.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_F5FD844B65B04322B160060D7FB8F690"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:microsoft_vc90_crt_x86.msm"
+            "SourcePath" = "8:Microsoft_VC100_MFC_x86.msm"
                 "Properties"
                 {
                 }

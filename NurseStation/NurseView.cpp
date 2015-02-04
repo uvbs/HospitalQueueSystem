@@ -1127,7 +1127,7 @@ int CNurseView::NoHisWriteDataToQueue(CString strSerialId)
 		//		log_ID,log_ID,NumStart,log_ID,strPatientName,Queue,qsInLine,priZero,call_id);
 		//}
 
-		insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s','%s',getdate(),%d,%d,'%s')"),
+		insertSql.Format(_T("insert into Queue(log_id,reg_id,queue_id,patient_id,patient_name,office_id,doctor_id,regtime,status,priority,queue_id_call) values('%s','%s',%d,'%s','%s','%s',%s,getdate(),%d,%d,'%s')"),
 			log_ID,log_ID,NumStart,log_ID,strPatientName,Queue,docID.IsEmpty()? _T("null"):_T("'")+docID+_T("'"),qsInLine,priZero,call_id);
 
 		try

@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0F2D8414161FF91FBF64F9EE2A537BC1"
+        "MsmKey" = "8:_4AF6170513222D842DA2087EBB7D5064"
         "OwnerKey" = "8:_AE8C7C14D9FE4B0CAFBEE6125D0DA11F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -27,7 +27,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6B5A7095C99E864EC50575E75D910786"
+        "MsmKey" = "8:_7AF463D3DF353BD6AA94501E2F12C711"
+        "OwnerKey" = "8:_AE8C7C14D9FE4B0CAFBEE6125D0DA11F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8143B22A357E94BCF1F053D4A4003986"
         "OwnerKey" = "8:_AE8C7C14D9FE4B0CAFBEE6125D0DA11F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -51,7 +57,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F0B6E0130B065CB988AC3EBEBF56C4C2"
+        "MsmKey" = "8:_F12F2A4F910172098F88F46CC4625C3D"
+        "OwnerKey" = "8:_AE8C7C14D9FE4B0CAFBEE6125D0DA11F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F6ACF3645858B41341ACC51D20C4AE7C"
         "OwnerKey" = "8:_AE8C7C14D9FE4B0CAFBEE6125D0DA11F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -112,7 +124,7 @@
         "InstallerBootstrapper" = "3:2"
             "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
             {
-            "Enabled" = "11:TRUE"
+            "Enabled" = "11:FALSE"
             "PromptEnabled" = "11:TRUE"
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
@@ -152,10 +164,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F2D8414161FF91FBF64F9EE2A537BC1"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4AF6170513222D842DA2087EBB7D5064"
             {
-            "SourcePath" = "8:COMDLG32.dll"
-            "TargetName" = "8:COMDLG32.dll"
+            "SourcePath" = "8:oledlg.dll"
+            "TargetName" = "8:oledlg.dll"
             "Tag" = "8:"
             "Folder" = "8:_A49DE99A97DB496C88D23BD23C0B180F"
             "Condition" = "8:"
@@ -192,10 +204,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6B5A7095C99E864EC50575E75D910786"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7AF463D3DF353BD6AA94501E2F12C711"
             {
-            "SourcePath" = "8:msado15.dll"
-            "TargetName" = "8:msado15.dll"
+            "SourcePath" = "8:OLEACC.dll"
+            "TargetName" = "8:OLEACC.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_A49DE99A97DB496C88D23BD23C0B180F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8143B22A357E94BCF1F053D4A4003986"
+            {
+            "SourcePath" = "8:COMDLG32.dll"
+            "TargetName" = "8:COMDLG32.dll"
             "Tag" = "8:"
             "Folder" = "8:_A49DE99A97DB496C88D23BD23C0B180F"
             "Condition" = "8:"
@@ -252,10 +284,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F0B6E0130B065CB988AC3EBEBF56C4C2"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F12F2A4F910172098F88F46CC4625C3D"
             {
-            "SourcePath" = "8:oledlg.dll"
-            "TargetName" = "8:oledlg.dll"
+            "SourcePath" = "8:IMM32.dll"
+            "TargetName" = "8:IMM32.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_A49DE99A97DB496C88D23BD23C0B180F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F6ACF3645858B41341ACC51D20C4AE7C"
+            {
+            "SourcePath" = "8:MSIMG32.dll"
+            "TargetName" = "8:MSIMG32.dll"
             "Tag" = "8:"
             "Folder" = "8:_A49DE99A97DB496C88D23BD23C0B180F"
             "Condition" = "8:"
@@ -351,8 +403,9 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Caller"
         "ProductCode" = "8:{0B90D042-8495-42BE-8EF3-F715DDAD7E74}"
-        "PackageCode" = "8:{9FB907D7-B416-4087-A0A0-D6B5B96380A0}"
+        "PackageCode" = "8:{E6899729-92A4-4D00-8020-770A70E68F3B}"
         "UpgradeCode" = "8:{910AFDFD-29D5-425D-9E14-C4EAAE556CED}"
+        "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"

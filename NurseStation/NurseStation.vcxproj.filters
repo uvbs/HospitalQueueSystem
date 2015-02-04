@@ -306,7 +306,7 @@
       <Filter>源文件</Filter>
     </Library>
     <Library Include="QueSystemLicense.lib">
-      <Filter>头文件</Filter>
+      <Filter>源文件</Filter>
     </Library>
   </ItemGroup>
   <ItemGroup>
