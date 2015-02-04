@@ -1,6 +1,8 @@
 Thumbs.db
 *.obj
 *.exe
+!QueSystemRegister.exe
+!CassiniDev.exe
 *.pdb
 *.aps
 *.pch
