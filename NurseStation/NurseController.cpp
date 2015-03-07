@@ -3408,6 +3408,8 @@ void CNurseController::OnRecvCmdResult(LPCMDRESULT pCmdResult, LPSOCKADDR_IN pso
 		//	strDoctorId, qsDoing, qsPrepare, qsInLine, m_strSqlDate, strDoctorId, qsDoing, m_strSqlDate);
 		CString strDoctorStr;
 
+
+
 		if(pDocInfo->bExpertFlag)
 		{
 			strDoctorStr = _T("Q.doctor_id=D.doctor_id");
