@@ -59,7 +59,7 @@ void WriteLog::Write(CString strLog)
 
 	mtLogFile.Lock(20);
 	CFile file;
-	if(!file.Open(strLogPath + time.Format(_T("\\log_%Y-%m-%d.txt")), 
+	if(!file.Open(strLogPath + time.Format(_T("\\log_%Y%m%d.log")), 
 		CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite))
 	{
 		return;
