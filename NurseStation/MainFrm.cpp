@@ -221,7 +221,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//ReadSuspendTimeData();
 	//m_hSuspendTime=CreateThread(NULL,0,SuspendTimeThread,this,NULL,0);//时间挂起线程
 	/////////////////////////////////////////////////
-	m_pVisonShowLED = new CVisonShowLED(this->m_hWnd);
+	m_pVisonShowLED = CVisonShowLED::GetInstance(this->m_hWnd);
 	////////////////////////////////////////////////实例化呼叫器接口
 	
 	CCallerInterface::GetInstance();
