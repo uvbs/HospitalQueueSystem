@@ -1,11 +1,17 @@
 #include "StdAfx.h"
 #include "VisonShowLED.h"
 #include "CommonConvert.h"
+#include "MyCommon.h"
+#include "WriteLog.h"
+#include "NurseStation.h"
 #define DEFALT_LOCAL_PORT 9527
 
+extern void MyWriteConsole(CString str);
 
 CVisonShowLED::CVisonShowLED() : m_hInstance(NULL)
 ,m_index(-1)
+,m_hDoShowWaitThread(NULL)
+,m_hFlushWaitInfo(NULL)
 {
 	LED_Initialize();
 	memset(&m_tLedParam,0,sizeof(m_tLedParam));
@@ -19,10 +25,14 @@ CVisonShowLED::CVisonShowLED() : m_hInstance(NULL)
 	m_tLedSendParam.devParam = m_tLedParam;
 	m_tLedSendParam.notifyMode = NOTIFY_EVENT;
 	m_tLedSendParam.wmMessage = WM_LED_NOTIFY;
+	ConnectToDB();
+	Start();
 }
 
-CVisonShowLED::CVisonShowLED(HWND hWnd) : 
-m_hInstance(NULL),m_index(-1)
+CVisonShowLED::CVisonShowLED(HWND hWnd) : m_hInstance(NULL)
+	,m_index(-1)
+	,m_hDoShowWaitThread(NULL)
+	,m_hFlushWaitInfo(NULL)
 {
 	LED_Initialize();
 	memset(&m_tLedParam,0,sizeof(m_tLedParam));
@@ -37,10 +47,20 @@ m_hInstance(NULL),m_index(-1)
 	m_tLedSendParam.notifyMode = NOTIFY_EVENT;
 	m_tLedSendParam.wmMessage = WM_LED_NOTIFY;
 	m_tLedSendParam.wmHandle = (long)hWnd;
+	ConnectToDB();
+	Start();
 }
 
 CVisonShowLED::~CVisonShowLED(void)
 {
+	if(m_hDoShowWaitThread)
+	{
+		TerminateThread(m_hDoShowWaitThread,0);
+	}
+	if(m_hFlushWaitInfo)
+	{
+		TerminateThread(m_hFlushWaitInfo,0);
+	}
 	Destory();
 }
 
@@ -176,6 +196,7 @@ void CVisonShowLED::Destory()
 
 void CVisonShowLED::SendDataToScreen(const CString& msg,const CString& wStrIP,const CRect& rect, DWORD lShowTime,int nRegion)
 {
+	if(m_strIpAdd != wStrIP)m_strIpAdd = wStrIP;
  	long index = CreateData(msg,rect,lShowTime,nRegion);//生成发送数据
 	int len = CCommonConvert::CStringToChar(wStrIP,NULL);
 	char* pStrIP = new char[len+1];
@@ -188,6 +209,7 @@ void CVisonShowLED::SendDataToScreen(const CString& msg,const CString& wStrIP,co
 	{
  		LED_SendToScreen(&m_tLedSendParam,index);//发送
 	}
+//	ReadWaitInfo();
 }
 
 void CVisonShowLED::SetHWnd(HWND hWnd)
@@ -206,6 +228,7 @@ long CVisonShowLED::CreateData(const CString& msg,const CRect& rect, DWORD lShow
 //		AddChapter(m_index,lShowTime,LED_WAIT_CHILD);
 //		AddRegion(m_index,left,top,rigth,bottom,0);
 		m_index = MakeRegion(ROOT_PLAY_REGION, ACTMODE_REPLACE, 0, nRegion, COLOR_MODE_DOUBLE,left,top,width,height,0);
+		
 		AddLeaf(m_index,lShowTime,LED_WAIT_CHILD);
 		int len = CCommonConvert::CStringToChar(msg,NULL);
 		char* pStrMsg = new char[len+1];
@@ -215,7 +238,251 @@ long CVisonShowLED::CreateData(const CString& msg,const CRect& rect, DWORD lShow
 			"宋体",12,RGB(255,0,0),WFS_NONE,1/*自动换行*/,0/*左对齐*/,
 			1/*立即显示*/,5/*引入速度*/,2/*立即引出*/,2/*引出速度*/,
 			0/*保留静态显示*/,3/*保留速度*/,lShowTime/*保留时间*/);
-		delete [] pStrMsg;
+		delete [] pStrMsg;	
 	}
 	return m_index;
+}
+
+CVisonShowLED* CVisonShowLED::GetInstance(HWND hWnd)
+{
+	static CVisonShowLED Instance(hWnd);
+	return &Instance;
+}
+
+BOOL CVisonShowLED::ReadWaitInfo()
+{
+	m_mMsgLock.Lock();
+	m_map_visionmsg.clear();
+	m_mMsgLock.Unlock();
+	if(m_DataBase.IsOpen())
+	{
+		try
+		{
+			CADORecordset pRe(&m_DataBase);
+			CString searchSql;
+			searchSql.Format(_T("select n.office_id,o.name from Nurse m,Nurse_Office n,Office o where m.nurse_id = n.nurse_id and o.office_id=n.office_id and m.nurse_id='%s';"),theApp.GetLoginID());
+			if(pRe.Open(searchSql,CADORecordset::openQuery))
+			{
+				if(!pRe.IsBOF())
+				{
+					ShowWaitInfo(&pRe);
+				}
+				pRe.Close();
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		catch(_com_error &e)
+		{
+			WriteLog::WriteDbErrLog(_T("CVisonShow::ReadWaitInfo"));
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
+BOOL CVisonShowLED::ConnectToDB()
+{
+	if(!m_DataBase.IsOpen())
+	{
+		CMainFrame* pMainFrame=((CNurseStationApp*)AfxGetApp())->m_pNurseWnd;
+		try
+		{
+			m_DataBase.SetConnectionString(pMainFrame->m_strConn);
+			return m_DataBase.Open();
+		}
+		catch (_com_error &e)
+		{
+			WriteLog::WriteDbErrLog(_T("CVisonShowLED::ConnectToDB"));
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
+BOOL CVisonShowLED::ShowWaitInfo(CADORecordset* pRe)
+{
+	if(!pRe)return FALSE;
+	m_mLock.Lock();
+//	CRect rect;
+//	static UINT left = MyCommon::GetProfileInt(_T("sys"),_T("WAITLEFT"),0,_T("sys\\VisonShow.ini"));
+//	static UINT right = MyCommon::GetProfileInt(_T("sys"),_T("WAITRIGHT"),256,_T("sys\\VisonShow.ini"));
+//	static UINT top = MyCommon::GetProfileInt(_T("sys"),_T("WAITTOP"),0,_T("sys\\VisonShow.ini"));
+//	static UINT bottom = MyCommon::GetProfileInt(_T("sys"),_T("WAITBOTTOM"),64,_T("sys\\VisonShow.ini"));
+//	static UINT nRegion = MyCommon::GetProfileInt(_T("sys"),_T("WAITREGION"),0,_T("sys\\VisonShow.ini"));
+//	static UINT nRow = MyCommon::GetProfileInt(_T("sys"),_T("WAITROW"),3,_T("sys\\VisonShow.ini"));
+	static UINT nPaient = MyCommon::GetProfileInt(_T("sys"),_T("WAITPAITNUM"),6,_T("sys\\VisonShow.ini"));
+//	static UINT nPage = MyCommon::GetProfileInt(_T("sys"),_T("WAITPAGE"),4,_T("sys\\VisonShow.ini"));
+//	rect.left = left; rect.right = right; rect.top = top; rect.bottom = bottom;
+	m_mLock.Unlock();
+	try{
+		m_mMsgLock.Lock();
+	while(!pRe->IsEOF())
+	{
+		CString office_id,office_name;
+		pRe->GetFieldValue(_T("office_id"),office_id);
+		pRe->GetFieldValue(_T("name"),office_name);
+		if(m_DataBase.IsOpen())
+		{
+			CADORecordset reset(&m_DataBase);
+			CString sql;
+			list<CString> listTemp;
+			listTemp.push_back(office_name);
+			sql.Format(_T("select * from queue where office_id='%s' and status=%d"),office_id,qsInLine);
+			if(reset.Open(sql,CADORecordset::openQuery))
+			{
+				if(!reset.IsBOF())
+				{
+					int nNum = nPaient;
+					while(!reset.IsEOF())
+					{
+						//写到内存
+						nNum--;
+						if(!nNum)break;
+						CString patient_name;
+						reset.GetFieldValue(_T("patient_name"),patient_name);
+						listTemp.push_back(patient_name);
+						reset.MoveNext();
+					}
+					m_map_visionmsg[office_id] = listTemp;
+				}
+			}
+		}
+		pRe->MoveNext();
+	}
+	}
+	catch (_com_error &e)
+	{
+		WriteLog::WriteDbErrLog(_T("CVisonShowLED::ShowWaitInfo"));
+		m_mMsgLock.Unlock();
+		return FALSE;
+	}
+	m_mMsgLock.Unlock();
+	return TRUE;
+}
+
+BOOL CVisonShowLED::CreateData(DWORD lShowTime)
+{
+	m_mLock.Lock();
+	CRect rect;
+	static UINT left = MyCommon::GetProfileInt(_T("sys"),_T("WAITLEFT"),0,_T("sys\\VisonShow.ini"));
+	static UINT right = MyCommon::GetProfileInt(_T("sys"),_T("WAITRIGHT"),256,_T("sys\\VisonShow.ini"));
+	static UINT top = MyCommon::GetProfileInt(_T("sys"),_T("WAITTOP"),0,_T("sys\\VisonShow.ini"));
+	static UINT bottom = MyCommon::GetProfileInt(_T("sys"),_T("WAITBOTTOM"),64,_T("sys\\VisonShow.ini"));
+	static UINT nRegion = MyCommon::GetProfileInt(_T("sys"),_T("WAITREGION"),0,_T("sys\\VisonShow.ini"));
+	static UINT nRow = MyCommon::GetProfileInt(_T("sys"),_T("WAITROW"),3,_T("sys\\VisonShow.ini"));
+	static UINT nPaient = MyCommon::GetProfileInt(_T("sys"),_T("WAITPAITNUM"),5,_T("sys\\VisonShow.ini"));
+	static UINT nPageShowTime = MyCommon::GetProfileInt(_T("sys"),_T("WAITPAGETIME"),4,_T("sys\\VisonShow.ini"));
+	rect.left = left; rect.right = right; rect.top = top; rect.bottom = bottom;
+	m_mLock.Unlock();
+	DWORD width,height;
+	width = rect.right - left;
+	height = rect.bottom - top;
+	if(m_hInstance)
+	{
+//		m_index = MakeRegion(ROOT_PLAY_REGION, ACTMODE_REPLACE, 0, nRegion, COLOR_MODE_DOUBLE,left,top,width,height,0);	
+		m_mMsgLock.Lock();//线程安全
+		int actiPage = m_map_visionmsg.size()/nRow;
+		if(m_map_visionmsg.size() % nRow) actiPage += 1;
+		for(int i=0;i<actiPage;i++)//显示多少页
+		{
+			CString showMsg;//显示的信息
+			map<CString,list<CString>>::const_iterator itera = m_map_visionmsg.begin();
+			//itera += (i * nRow);
+			for(int k=0;k<(int)i*nRow;k++)
+			{
+				itera++;
+			}
+			for(int m=0;m<(int)nPaient;m++)
+			{
+				int j = 0;
+				map<CString,list<CString>>::const_iterator tempItera = itera;
+				for(tempItera;tempItera != m_map_visionmsg.end();tempItera++)
+				{
+					if(j == nRow)break;
+					list<CString> patientNameList = tempItera->second;
+					CString patientName;
+					if(m<(int)patientNameList.size())
+						//取出链表中对应位置的字符串
+					{
+						GetListData(&patientNameList,patientName,m);
+					}
+					if(patientName.IsEmpty())
+						showMsg+=_T("        ");
+					else if(patientName.GetLength() == 1)
+					{
+						showMsg += patientName;
+						showMsg += _T("      ");
+					}
+					else if(patientName.GetLength() == 2)
+					{
+						showMsg += patientName;
+						showMsg += _T("    ");
+					}
+					else if(patientName.GetLength() == 3)
+					{
+						showMsg += patientName;
+						showMsg += _T("  ");
+					}
+					else 
+						showMsg += patientName;
+					showMsg += _T("  ");
+					j++;
+				}
+				showMsg+=_T("\n");
+			}
+			//发送数据
+#ifdef _DEBUG
+		MyWriteConsole(showMsg);
+#endif
+			SendDataToScreen(showMsg,m_strIpAdd,rect,lShowTime,nRegion);
+			Sleep(nPageShowTime*1000);
+		}
+		m_mMsgLock.Unlock();
+	}
+	return TRUE;
+}
+
+BOOL CVisonShowLED::GetListData(const list<CString>* pList,CString& data,int location)
+{
+	if(location>=(int)pList->size())return FALSE;
+	list<CString>::const_iterator itera = pList->begin();
+	for(int i=0;i<location;i++)
+	{
+		itera++;
+	}
+	data = *itera;
+	return TRUE;
+}
+
+DWORD WINAPI CVisonShowLED::DoShowWait(LPVOID pParam)
+{
+	CVisonShowLED* pThis = (CVisonShowLED*) pParam;
+	while(TRUE)
+	{
+		pThis->CreateData(10*1000);
+	}
+	return 0;
+}
+
+BOOL CVisonShowLED::Start()
+{
+	m_hDoShowWaitThread = CreateThread(NULL,0,DoShowWait,this,0,NULL);
+	if(!m_hDoShowWaitThread)return FALSE;
+	m_hFlushWaitInfo = CreateThread(NULL,0,FlushWaitInfo,this,0,NULL);
+	if(!m_hFlushWaitInfo)return FALSE;
+	return TRUE;
+}
+
+DWORD WINAPI CVisonShowLED::FlushWaitInfo(LPVOID pParam)
+{
+	CVisonShowLED* pThis = (CVisonShowLED*) pParam;
+	while(TRUE)
+	{
+		pThis->ReadWaitInfo();
+		Sleep(1000);
+	}
+	return 0;
 }

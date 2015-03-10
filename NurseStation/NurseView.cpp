@@ -941,7 +941,7 @@ int CNurseView::NoHisWriteDataToQueue(CString strSerialId)
 	m_editQueueNum.SetWindowText(_T(""));
 	CMainFrame* pMainFrame=((CNurseStationApp*)AfxGetApp())->m_pNurseWnd;
 
-	CString strPatientName=_T("");
+	CString strPatientName;
 	m_que_patname.GetWindowText(strPatientName);
 	CString que_paitOfficeID=_T("");
 	m_comex_quename.GetLBText(m_comex_quename.GetCurSel(),que_paitOfficeID);

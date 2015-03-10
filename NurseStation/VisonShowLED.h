@@ -1,13 +1,21 @@
 #pragma once
 #include "LEDApi.h"
+#include "ado2.h"
+#include "afxmt.h"
+#include <map>
+#include <list>
+using namespace std;
+
+
 #define WM_LED_NOTIFY WM_USER+1001
 
 class CVisonShowLED
 {
 public:
+	~CVisonShowLED(void);
+private:
 	CVisonShowLED();
 	CVisonShowLED(HWND hWnd);
-	~CVisonShowLED(void);
 private:
 	//动态链接库初始化
 	long (_stdcall *LED_Startup)(void);
@@ -612,6 +620,7 @@ private:
 	bool LED_Initialize();
 	long CreateData(const CString& msg,const CRect& rect,
 		DWORD lShowTime,int nRegion);
+	BOOL CreateData(DWORD lShowTime);
 	long m_index;
 public:
 //	long VisonShowOpen(HWND hWnd);
@@ -621,4 +630,23 @@ public:
 	void SetHWnd(HWND hWnd);
 	//获取控制卡应答结果的数据
 	long (_stdcall *LED_GetNotifyParam)(PNotifyParam notify, long index);
+	static CVisonShowLED* GetInstance(HWND hWnd);
+private:
+	CADODatabase m_DataBase;
+	BOOL ConnectToDB();
+	BOOL ShowWaitInfo(CADORecordset* pRe);
+	CMutex m_mLock;
+private:
+	map<CString,list<CString>> m_map_visionmsg;
+	CMutex m_mMsgLock;
+	BOOL GetListData(const list<CString>* pList,CString& data,int location);
+private:
+	static DWORD WINAPI DoShowWait(LPVOID pParam);
+	HANDLE m_hDoShowWaitThread;
+private:
+	BOOL ReadWaitInfo();
+	static DWORD WINAPI FlushWaitInfo(LPVOID pParam);
+	HANDLE m_hFlushWaitInfo;
+	BOOL Start();
+	CString m_strIpAdd;
 };
