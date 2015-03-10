@@ -21,7 +21,7 @@ protected:
 public:
 	CPropPageDoctorInfo* m_pPropPageDoctorInfo;
 	CPropPageDoctorPassword* m_pPropPageDoctorPassword;
-	CPropPageQueueChange* m_pPropPageQueueChange;
+	//CPropPageQueueChange* m_pPropPageQueueChange;
 };
 
 

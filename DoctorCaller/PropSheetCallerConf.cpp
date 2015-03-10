@@ -16,13 +16,13 @@ CPropSheetCallerConf::CPropSheetCallerConf(UINT nIDCaption, CWnd* pParentWnd, UI
 {
 	this->m_psh.dwFlags &= ~(PSH_HASHELP);
 
-	m_pPropPageQueueChange = new CPropPageQueueChange(
-		((CDoctorCallerDlg*)pParentWnd)->GetController()->GetUserId(),
-		((CDoctorCallerDlg*)pParentWnd)->GetController()->m_strConn,
-		((CDoctorCallerDlg*)pParentWnd)->GetController()->GetNurseId());
-	m_pPropPageQueueChange->m_psp.dwFlags &= ~(PSP_HASHELP);
+	//m_pPropPageQueueChange = new CPropPageQueueChange(
+	//	((CDoctorCallerDlg*)pParentWnd)->GetController()->GetUserId(),
+	//	((CDoctorCallerDlg*)pParentWnd)->GetController()->m_strConn,
+	//	((CDoctorCallerDlg*)pParentWnd)->GetController()->GetNurseId());
+	//m_pPropPageQueueChange->m_psp.dwFlags &= ~(PSP_HASHELP);
 
-	AddPage(m_pPropPageQueueChange);
+	//AddPage(m_pPropPageQueueChange);
 
 	m_pPropPageDoctorInfo = new CPropPageDoctorInfo(
 		((CDoctorCallerDlg*)pParentWnd)->GetController()->GetUserId(),
@@ -45,13 +45,13 @@ CPropSheetCallerConf::CPropSheetCallerConf(LPCTSTR pszCaption, CWnd* pParentWnd,
 {
 	this->m_psh.dwFlags &= ~(PSH_HASHELP);
 
-	m_pPropPageQueueChange = new CPropPageQueueChange(
-		((CDoctorCallerDlg*)pParentWnd)->GetController()->GetUserId(),
-		((CDoctorCallerDlg*)pParentWnd)->GetController()->m_strConn,
-		((CDoctorCallerDlg*)pParentWnd)->GetController()->GetNurseId());
-	m_pPropPageQueueChange->m_psp.dwFlags &= ~(PSP_HASHELP);
+	//m_pPropPageQueueChange = new CPropPageQueueChange(
+	//	((CDoctorCallerDlg*)pParentWnd)->GetController()->GetUserId(),
+	//	((CDoctorCallerDlg*)pParentWnd)->GetController()->m_strConn,
+	//	((CDoctorCallerDlg*)pParentWnd)->GetController()->GetNurseId());
+	//m_pPropPageQueueChange->m_psp.dwFlags &= ~(PSP_HASHELP);
 
-	AddPage(m_pPropPageQueueChange);
+	//AddPage(m_pPropPageQueueChange);
 
 	m_pPropPageDoctorInfo = new CPropPageDoctorInfo(
 		((CDoctorCallerDlg*)pParentWnd)->GetController()->GetUserId(),

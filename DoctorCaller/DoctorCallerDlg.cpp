@@ -227,7 +227,7 @@ BOOL CDoctorCallerDlg::OnInitDialog()
 	//m_pDoctorController->MoveChatControls();
 	//m_pDoctorController->ShowChat();
 
-	//SetTimer(TIMERID_UPDATE_PATIENT, 5000, NULL);
+	SetTimer(TIMERID_UPDATE_PATIENT, 10000, NULL);
 
 	m_bDlgInited = TRUE;
 
@@ -1015,7 +1015,7 @@ void CDoctorCallerDlg::OnTimer(UINT_PTR nIDEvent)
 	{
 	case TIMERID_UPDATE_PATIENT:
 		{
-			//OnUpdatePatient();
+			OnUpdatePatient();
 		}
 		break;
 	//case TIMERID_ENABLE_CALL:
@@ -1032,7 +1032,7 @@ void CDoctorCallerDlg::OnTimer(UINT_PTR nIDEvent)
 				KillTimer(TIMERID_SECOND);
 				m_btnCall.EnableWindow();
 				m_btnDiscard.EnableWindow();
-				m_btnCall.SetWindowText(_T("下一位"));
+				m_btnCall.SetWindowText(_T("呼叫"));
 				m_btnDiscard.SetWindowText(_T("过号"));
 			}
 			else
