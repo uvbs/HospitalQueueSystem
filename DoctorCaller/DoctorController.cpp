@@ -70,36 +70,36 @@ void CDoctorController::OnRecvCmdResult(LPCMDRESULT pCmdResult, LPSOCKADDR_IN ps
 			CString strDoctorStr;
 
 			//一个医生只处理一个科室
-			if(m_bExpertFlag)
-			{
-				strDoctorStr = _T("Q.doctor_id=D.doctor_id");
-			}
-			else
-			{
-				strDoctorStr = _T("(Q.doctor_id is null or Q.doctor_id='' or Q.doctor_id=D.doctor_id)");
-			}
-			m_strSelect.Format(_T("Select Q.log_id,Q.queue_id_call,Q.patient_name,Q.patient_gender,Q.status from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and %s and status in (%d,%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime) order by Q.status,Q.priority desc,Q.regtime;")
-				,GetUserId(), strDoctorStr, qsDoing, qsPrepare, qsInLine, m_DbParam.GetDataDays());
-			m_strSelectDoneDiscard.Format(_T("Select Q.log_id,Q.queue_id_call,Q.patient_name,Q.patient_gender,Q.status from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and status in (%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime) order by Q.status desc,Q.priority desc,Q.regtime;")
-				,GetUserId(), qsDone, qsDiscard, m_DbParam.GetDataDays());
-			m_strSelectLeft.Format(_T("Select count(Q.log_id) LeftCount from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and %s and status in (%d,%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime);")
-				,GetUserId(), strDoctorStr, qsDoing, qsPrepare, qsInLine, m_DbParam.GetDataDays());
-
-			//一个医生可处理多个科室
 			//if(m_bExpertFlag)
 			//{
-			//	strDoctorStr.Format(_T("doctor_id='%s'"), GetUserId());
+			//	strDoctorStr = _T("Q.doctor_id=D.doctor_id");
 			//}
 			//else
 			//{
-			//	strDoctorStr.Format(_T("(doctor_id is null or doctor_id='' or doctor_id='%s')"), GetUserId());
+			//	strDoctorStr = _T("(Q.doctor_id is null or Q.doctor_id='' or Q.doctor_id=D.doctor_id)");
 			//}
-			//m_strSelect.Format(_T("Select log_id,queue_id_call,patient_name,patient_gender,status from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and %s and status in (%d,%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime)  order by status,priority desc,regtime;")
+			//m_strSelect.Format(_T("Select Q.log_id,Q.queue_id_call,Q.patient_name,Q.patient_gender,Q.status from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and %s and status in (%d,%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime) order by Q.status,Q.priority desc,Q.regtime;")
 			//	,GetUserId(), strDoctorStr, qsDoing, qsPrepare, qsInLine, m_DbParam.GetDataDays());
-			//m_strSelectDoneDiscard.Format(_T("Select log_id,queue_id_call,patient_name,patient_gender,status from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and status in (%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime) order by status desc,priority desc,regtime;")
+			//m_strSelectDoneDiscard.Format(_T("Select Q.log_id,Q.queue_id_call,Q.patient_name,Q.patient_gender,Q.status from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and status in (%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime) order by Q.status desc,Q.priority desc,Q.regtime;")
 			//	,GetUserId(), qsDone, qsDiscard, m_DbParam.GetDataDays());
-			//m_strSelectLeft.Format(_T("Select count(log_id) LeftCount from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and %s and status in (%d,%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime);")
+			//m_strSelectLeft.Format(_T("Select count(Q.log_id) LeftCount from Queue Q, (select doctor_id, office_id from Doctor where doctor_id='%s') D where Q.office_id=D.office_id and %s and status in (%d,%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime);")
 			//	,GetUserId(), strDoctorStr, qsDoing, qsPrepare, qsInLine, m_DbParam.GetDataDays());
+
+			//一个医生可处理多个科室
+			if(m_bExpertFlag)
+			{
+				strDoctorStr.Format(_T("doctor_id='%s'"), GetUserId());
+			}
+			else
+			{
+				strDoctorStr.Format(_T("(doctor_id is null or doctor_id='' or doctor_id='%s')"), GetUserId());
+			}
+			m_strSelect.Format(_T("Select log_id,queue_id_call,patient_name,patient_gender,status from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and %s and status in (%d,%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime)  order by status,priority desc,regtime;")
+				,GetUserId(), strDoctorStr, qsDoing, qsPrepare, qsInLine, m_DbParam.GetDataDays());
+			m_strSelectDoneDiscard.Format(_T("Select log_id,queue_id_call,patient_name,patient_gender,status from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and status in (%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime) order by status desc,priority desc,regtime;")
+				,GetUserId(), qsDone, qsDiscard, m_DbParam.GetDataDays());
+			m_strSelectLeft.Format(_T("Select count(log_id) LeftCount from Queue where office_id in (select office_id from Doctor_Office where doctor_id='%s') and %s and status in (%d,%d,%d) and regtime>cast(CONVERT(varchar(100),dateadd(day,-%d,GETDATE()),23) as datetime);")
+				,GetUserId(), strDoctorStr, qsDoing, qsPrepare, qsInLine, m_DbParam.GetDataDays());
 
 			if(m_pParent)
 			{
