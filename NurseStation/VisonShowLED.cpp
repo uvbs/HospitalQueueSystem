@@ -196,6 +196,7 @@ void CVisonShowLED::Destory()
 
 void CVisonShowLED::SendDataToScreen(const CString& msg,const CString& wStrIP,const CRect& rect, DWORD lShowTime,int nRegion)
 {
+	if(m_strIpAdd != wStrIP)m_strIpAdd = wStrIP;
  	long index = CreateData(msg,rect,lShowTime,nRegion);//生成发送数据
 	int len = CCommonConvert::CStringToChar(wStrIP,NULL);
 	char* pStrIP = new char[len+1];
@@ -436,7 +437,7 @@ BOOL CVisonShowLED::CreateData(DWORD lShowTime)
 #ifdef _DEBUG
 		MyWriteConsole(showMsg);
 #endif
-//			SendDataToScreen(showMsg,rect,
+			SendDataToScreen(showMsg,m_strIpAdd,rect,lShowTime,nRegion);
 			Sleep(nPageShowTime*1000);
 		}
 		m_mMsgLock.Unlock();

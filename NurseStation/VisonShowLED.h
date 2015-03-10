@@ -648,4 +648,5 @@ private:
 	static DWORD WINAPI FlushWaitInfo(LPVOID pParam);
 	HANDLE m_hFlushWaitInfo;
 	BOOL Start();
+	CString m_strIpAdd;
 };
